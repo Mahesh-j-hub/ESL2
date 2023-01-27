@@ -1,0 +1,294 @@
+﻿#DDAttempts {
+    float: right;
+    margin-right: 280px;
+}
+
+#DDBatch, #DDDimension, #DDTest, #DDAttempts, #DDChartType {
+    padding: 5px;
+}
+
+#DDTest {
+    margin-left: 10px;
+}
+
+#Button1, #Button2, #Button3, #Button4 {
+    margin-top: 10px;
+    padding: 5px;
+}
+
+#Button1, #Button4 {
+    margin-left: 10px;
+}
+
+/*#form1 {
+    margin-top: 10px;
+}*/
+
+.body-text {
+    font-family: "Montserrat", sans-serif;
+    margin-top: 100px;
+}
+
+nav {
+    min-height: 4vh;
+    font-family: "Montserrat", sans-serif;
+}
+
+.heading {
+    color: white;
+    padding: 5px 10px 5px 10px;
+    background-color: #48a0d9;
+    font-size: 20px;
+    letter-spacing: 1px;
+}
+
+.nav-links {
+    width: 100%;
+}
+
+    .nav-links li {
+        list-style: none;
+    }
+
+    .nav-links a {
+        color: white;
+        text-decoration: none;
+        letter-spacing: 2px;
+        font-weight: normal;
+        font-size: 14px;
+        padding: 14px;
+    }
+
+        .nav-links a:hover:not(.active) {
+            background-color: lightseagreen;
+        }
+
+    .nav-links li a.active {
+        background-color: #4caf50;
+    }
+
+ul {
+    list-style-type: none;
+    /*margin: 0;*/
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+    border-right: 1px solid #bbb;
+}
+
+    li:last-child {
+        border-right: none;
+    }
+
+    li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+        li a:hover:not(.active) {
+            background-color: white;
+        }
+
+.active {
+    background-color: #04AA6D;
+}
+
+
+li {
+    float: left;
+    border-right: 1px solid #bbb;
+}
+
+    li:last-child {
+        border-right: none;
+    }
+
+#login-div {
+    position: absolute;
+    left: 30%;
+    top: 30%;
+    border: 3px solid #000;
+    padding: 30px 30px;
+}
+
+.field-validation-error {
+    color: red;
+}
+
+fieldset {
+    border: 1px solid #ddd;
+    padding: 0 1.4em 1.4em 1.4em;
+    margin: 0 0 1.5em 0;
+}
+
+legend {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+textarea {
+    min-height: 75px;
+}
+
+.editor-label {
+    margin: 1em 0 0 0;
+}
+
+.editor-field {
+    margin: 0.5em 0 0 0;
+}
+
+body1 {
+    font-size: .85em;
+    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    color: #e38787;
+    background-color: #fff;
+}
+
+#footer {
+    padding: 15px;
+    clear: both;
+}
+
+.loaderImg {
+    width: 100px;
+    height: 100px;
+    top: 250px;
+    margin-left: 47%;
+    position: absolute;
+    z-index: 0;
+    text-align: center;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+
+.dropdown1 {
+    float: left;
+    overflow: hidden;
+}
+
+    .dropdown1 .dropbtn1 {
+        font-size: 16px;
+        border: none;
+        outline: none;
+        color: white;
+        padding: 14px 16px;
+        background-color: inherit;
+        font-family: inherit;
+        margin: 0;
+    }
+
+    .navbar a:hover, .dropdown1:hover .dropbtn1 {
+        background-color: grey;
+    }
+
+.dropdown-content1 {
+    /*display: block;*/
+    position: absolute;
+    background-color: Black;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    overflow: auto;
+}
+
+    .dropdown-content1 a {
+        float: none;
+        background-color: black;
+        color: white;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: grid;
+        text-align: left;
+    }
+
+        .dropdown-content1 a:hover {
+            background-color: red;
+            color: black;
+            display: block;
+        }
+
+.dropdown1:hover .dropdown-content1 {
+    display: block;
+}
+
+#Grid1, #Grid2, #Grid3 {
+    float: left;
+    margin: 20px;
+}
+
+    /*#Grid1 tr th, #Grid2 tr th, #Grid3 tr th {
+                padding: 5px;
+            }*/
+
+    #Grid1 tr td {
+        padding: 5px;
+        border: 1px solid #ddd;
+    }
+
+    #Grid1 tr th {
+        padding: 5px;
+    }
+
+    #Grid2 tr td {
+        padding: 5px;
+        border: 1px solid #ddd;
+    }
+
+    #Grid2 tr th {
+        padding: 5px;
+    }
+
+    #Grid3 tr td {
+        padding: 5px;
+        border: 1px solid #ddd;
+    }
+
+    #Grid3 tr th {
+        padding: 5px;
+    }
+
+#Grid1 {
+    margin-left: 90px;
+}

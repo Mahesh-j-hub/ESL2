@@ -1,0 +1,1900 @@
+USE [master]
+GO
+/****** Object:  Database [ESL]    Script Date: 1/27/2023 5:03:05 PM ******/
+CREATE DATABASE [ESL]
+CONTAINMENT = NONE
+ON  PRIMARY 
+( NAME = N'SkillLadder', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\SkillLadder.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+LOG ON 
+( NAME = N'SkillLadder_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\SkillLadder_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+WITH CATALOG_COLLATION = DATABASE_DEFAULT
+GO
+ALTER DATABASE [ESL] SET COMPATIBILITY_LEVEL = 150
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [ESL].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [ESL] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [ESL] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [ESL] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [ESL] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [ESL] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [ESL] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [ESL] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [ESL] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [ESL] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [ESL] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [ESL] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [ESL] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [ESL] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [ESL] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [ESL] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [ESL] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [ESL] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [ESL] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [ESL] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [ESL] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [ESL] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [ESL] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [ESL] SET RECOVERY FULL 
+GO
+ALTER DATABASE [ESL] SET  MULTI_USER 
+GO
+ALTER DATABASE [ESL] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [ESL] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [ESL] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [ESL] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [ESL] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [ESL] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'ESL', N'ON'
+GO
+ALTER DATABASE [ESL] SET QUERY_STORE = OFF
+GO
+USE [ESL]
+GO
+/****** Object:  Table [dbo].[Tracker]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Tracker](
+    [Tracker_Id] [int] IDENTITY(1,1) NOT NULL,
+    [Emp_Id] [int] NOT NULL,
+    [Employee_Name] [nvarchar](100) NOT NULL,
+    [Batch] [int] NULL,
+    [DOJ] [date] NOT NULL,
+    [Location] [varchar](50) NULL,
+    [Status] [varchar](50) NOT NULL,
+    [Educational_Qualification] [varchar](50) NULL,
+    [Branch] [varchar](100) NULL,
+    [FCA_L_PL_Prog] [varchar](50) NULL,
+    [FCA_L_PL_Score] [int] NULL,
+    [FCA_L_PL_Date] [date] NULL,
+    [TCB_Assigned] [nvarchar](50) NULL,
+    [TCB_Specialization] [nvarchar](100) NULL,
+    [Practice] [nvarchar](50) NULL,
+    [FCA_SE_1] [int] NULL,
+    [FCA_SE_2] [int] NULL,
+    [FCA_SE_3] [int] NULL,
+    [FCA_SE_Cleared_Date] [date] NULL,
+    [SE_Attempts] [int] NULL,
+    [TCB_Prog_Lang] [nvarchar](50) NULL,
+    [FCA_PL1] [int] NULL,
+    [FCA_PL2] [int] NULL,
+    [FCA_PL3] [int] NULL,
+    [FCA_PL_Cleared_Date] [date] NULL,
+    [PL_Attempts] [int] NULL,
+    [Hackathon_1_Feedback] [varchar](50) NULL,
+    [Hackathon_2_Feedback] [varchar](50) NULL,
+    [Prog_Lang_Training_Start] [date] NULL,
+    [Prog_Lang_Trg_End] [date] NULL,
+    [SCL_End] [date] NULL,
+    [FCA_Due_Date] [date] NULL,
+    [Training_Stage] [int] NULL,
+    [TCB_Trg_Start] [date] NULL,
+    [Stage_2_Start] [date] NULL,
+    [Stage_3_Start] [date] NULL,
+    [Stage_4_Start] [date] NULL,
+    [KenMAP_Level_3_Date1] [date] NULL,
+    [KenMAP_Level_3_Date2] [date] NULL,
+    [Project] [nvarchar](100) NULL,
+    [Project_Start_Date] [date] NULL,
+    [isActive] [bit] NULL,
+    [KenMap_Level_3_Rating] [int] NULL,
+    [Comments] [varchar](max) NULL,
+CONSTRAINT [PK_Tracker] PRIMARY KEY CLUSTERED 
+(
+    [Tracker_Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  View [dbo].[ViewName]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[ViewName] AS 
+SELECT Count(*) as 'FCA' FROM Tracker WHERE FCA_PL1 >= 50 and Batch = 1
+UNION all
+SELECT Count(*)  FROM Tracker WHERE FCA_PL2 >= 50 and Batch = 1
+UNION all
+SELECT Count(*)  FROM Tracker WHERE FCA_PL3 >= 50 and Batch = 1;
+GO
+/****** Object:  View [dbo].[pl]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create view [dbo].[pl] as
+select FCA_L_PL_Prog from Tracker
+where FCA_PL1 >= 50
+GO
+/****** Object:  Table [dbo].[ASETable]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ASETable](
+    [Tracker_Id] [int] IDENTITY(1,1) NOT NULL,
+    [Emp_Id] [int] NOT NULL,
+    [Employee_Name] [nvarchar](100) NOT NULL,
+    [Batch] [int] NULL,
+    [DOJ] [date] NOT NULL,
+    [Location] [varchar](50) NULL,
+    [Status] [varchar](50) NOT NULL,
+    [Educational_Qualification] [varchar](50) NULL,
+    [Branch] [varchar](100) NULL,
+    [FCA_L_PL_Prog] [varchar](50) NULL,
+    [FCA_L_PL_Score] [int] NULL,
+    [FCA_L_PL_Date] [date] NULL,
+    [TCB_Assigned] [nvarchar](50) NULL,
+    [TCB_Specialization] [nvarchar](100) NULL,
+    [Practice] [nvarchar](50) NULL,
+    [FCA_SE_1] [int] NULL,
+    [FCA_SE_2] [int] NULL,
+    [FCA_SE_3] [int] NULL,
+    [FCA_SE_Cleared_Date] [date] NULL,
+    [SE_Attempts] [int] NULL,
+    [TCB_Prog_Lang] [nvarchar](50) NULL,
+    [FCA_PL1] [int] NULL,
+    [FCA_PL2] [int] NULL,
+    [FCA_PL3] [int] NULL,
+    [FCA_PL_Cleared_Date] [date] NULL,
+    [PL_Attempts] [int] NULL,
+    [Hackathon_1_Feedback] [varchar](50) NULL,
+    [Hackathon_2_Feedback] [varchar](50) NULL,
+    [Prog_Lang_Training_Start] [date] NULL,
+    [Prog_Lang_Trg_End] [date] NULL,
+    [SCL_End] [date] NULL,
+    [FCA_Due_Date] [date] NULL,
+    [Training_Stage] [int] NULL,
+    [TCB_Trg_Start] [date] NULL,
+    [Stage_2_Start] [date] NULL,
+    [Stage_3_Start] [date] NULL,
+    [Stage_4_Start] [date] NULL,
+    [KenMAP_Level_3_Date1] [date] NULL,
+    [KenMAP_Level_3_Date2] [date] NULL,
+    [KenMAP_Level_3_Rating] [int] NULL,
+    [Project] [nvarchar](100) NULL,
+    [Project_Start_Date] [date] NULL,
+CONSTRAINT [PK_ASETable] PRIMARY KEY CLUSTERED 
+(
+    [Emp_Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Attempts]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Attempts](
+    [Attempt] [varchar](20) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Batch 1]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Batch 1](
+    [FCA_PL] [varchar](50) NOT NULL,
+    [Num_Emp_Cleared_FCA_PL] [int] NOT NULL,
+    [FCA_SE] [varchar](50) NOT NULL,
+    [Num_Emp_Cleared_FCA_SE] [int] NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Batch 2]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Batch 2](
+    [FCA_PL] [varchar](50) NOT NULL,
+    [Num_Emp_Cleared_FCA_PL] [int] NOT NULL,
+    [FCA_SE] [varchar](50) NOT NULL,
+    [Num_Emp_Cleared_FCA_SE] [int] NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Batch 3]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Batch 3](
+    [FCA_PL] [varchar](50) NOT NULL,
+    [Num_Emp_Cleared_FCA_PL] [int] NOT NULL,
+    [FCA_SE] [varchar](50) NOT NULL,
+    [Num_Emp_Cleared_FCA_SE] [int] NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Batch 4]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Batch 4](
+    [FCA_PL] [varchar](50) NOT NULL,
+    [Num_Emp_Cleared_FCA_PL] [int] NOT NULL,
+    [FCA_SE] [varchar](50) NOT NULL,
+    [Num_Emp_Cleared_FCA_SE] [int] NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[FileLogTable]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[FileLogTable](
+    [Sr_No] [int] IDENTITY(1,1) NOT NULL,
+    [FileName] [nvarchar](100) NOT NULL,
+    [Success_Count] [int] NOT NULL,
+    [Failed_Count] [int] NOT NULL,
+    [Uploaded_By] [int] NULL,
+    [Uploaded_Date] [date] NULL,
+CONSTRAINT [PK_FileLogTable] PRIMARY KEY CLUSTERED 
+(
+    [Sr_No] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Role_Master_tbl]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Role_Master_tbl](
+    [RoleId] [int] IDENTITY(1,1) NOT NULL,
+    [Role Name] [nvarchar](50) NOT NULL,
+    [Role Description] [nvarchar](50) NOT NULL,
+    [CreatedBy] [int] NOT NULL,
+    [CreatedDate] [date] NOT NULL,
+    [UpdatedBy] [int] NULL,
+    [UpdatedDate] [date] NULL,
+    [IsActive] [bit] NOT NULL,
+CONSTRAINT [PK_Role_Master_tbl] PRIMARY KEY CLUSTERED 
+(
+    [RoleId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Rolemap_tbl]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Rolemap_tbl](
+    [RoleMApId] [int] IDENTITY(1,1) NOT NULL,
+    [user_id] [int] NULL,
+    [RoleId] [int] NULL,
+    [CreatedBy] [int] NULL,
+    [CreatedDate] [date] NULL,
+    [UpdatedBy] [int] NULL,
+    [UpdatedDate] [date] NULL,
+PRIMARY KEY CLUSTERED 
+(
+    [RoleMApId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[TCRTable]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TCRTable](
+    [TCR_Id] [int] IDENTITY(1,1) NOT NULL,
+    [Emp_Id] [int] NOT NULL,
+    [Employee_Name] [nvarchar](100) NOT NULL,
+    [Manager_Emp_Id] [int] NOT NULL,
+    [Manager_Name] [nvarchar](100) NOT NULL,
+    [Band] [nvarchar](50) NULL,
+    [Org_Unit_ID] [int] NULL,
+    [Org_Unit] [nvarchar](50) NULL,
+    [Emp_Selected_Primary_TCB] [nvarchar](50) NULL,
+    [Date_Of_Hire] [date] NULL,
+    [Ongoing_TCB] [nvarchar](50) NULL,
+    [Hired_TCB] [nvarchar](50) NULL,
+    [Hired_TCB_Specialization] [nvarchar](50) NULL,
+    [Hired_Rating] [int] NULL,
+    [Date_of_SME_Assessment] [date] NULL,
+    [SME_Emp_No] [int] NULL,
+    [SME_Name] [nvarchar](100) NULL,
+    [SME_Assessed_Primary_TCB] [nvarchar](50) NULL,
+    [SME_Assessed_KENMAP_Rating] [int] NULL,
+    [Current_Status] [nvarchar](100) NULL,
+    [Current_TCB_Requested_For] [nvarchar](100) NULL,
+    [Current_Date_of_Request] [date] NULL,
+    [Current_Name_of_SME] [nvarchar](100) NULL,
+    [Current_Request_Id] [int] NULL,
+    [SME_Assessed_Specialization] [nvarchar](100) NULL,
+    [Employee_Specialization_Primary_TCB] [nvarchar](100) NULL,
+CONSTRAINT [PK_TCRTable] PRIMARY KEY CLUSTERED 
+(
+    [Emp_Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[TrackerT]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TrackerT](
+    [Tracker_Id] [int] IDENTITY(1,1) NOT NULL,
+    [IsActive] [bit] NULL,
+    [Emp_Id] [int] NOT NULL,
+    [Employee_Name] [varchar](100) NOT NULL,
+    [Batch] [int] NULL,
+    [DOJ] [date] NOT NULL,
+    [Location] [varchar](50) NULL,
+    [Status] [varchar](50) NULL,
+    [Educational_Qualification] [varchar](50) NULL,
+    [Branch] [varchar](100) NULL,
+    [FCA_L_PL_Prog] [varchar](50) NULL,
+    [FCA_L_PL_Score] [int] NULL,
+    [FCA_L_PL_Date] [date] NULL,
+    [TCB_Assigned] [varchar](50) NULL,
+    [TCB_Specialization] [varchar](100) NULL,
+    [Practice] [varchar](50) NULL,
+    [FCA_SE_1] [int] NULL,
+    [FCA_SE_2] [int] NULL,
+    [FCA_SE_3] [int] NULL,
+    [FCA_SE_Cleared_Date] [date] NULL,
+    [SE_Attempts] [int] NULL,
+    [TCB_Prog_Lang] [varchar](50) NULL,
+    [FCA_PL1] [int] NULL,
+    [FCA_PL2] [int] NULL,
+    [FCA_PL3] [int] NULL,
+    [FCA_PL_Cleared_Date] [date] NULL,
+    [PL_Attempts] [int] NULL,
+    [Hackathon_1_Feedback] [varchar](50) NULL,
+    [Hackathon_2_Feedback] [varchar](50) NULL,
+    [Prog_Lang_Training_Start] [date] NULL,
+    [Prog_Lang_Trg_End] [date] NULL,
+    [SCL_End] [date] NULL,
+    [FCA_Due_Date] [date] NULL,
+    [Training_Stage] [int] NULL,
+    [TCB_Trg_Start] [date] NULL,
+    [Stage_2_Start] [date] NULL,
+    [Stage_3_Start] [date] NULL,
+    [Stage_4_Start] [date] NULL,
+    [KenMAP_Level_3_Date1] [date] NULL,
+    [KenMAP_Level_3_Date2] [date] NULL,
+    [Project] [varchar](100) NULL,
+    [Project_Start_Date] [date] NULL,
+    [KenMap_Level_3_Rating] [int] NULL,
+    [Comments] [varchar](max) NULL,
+PRIMARY KEY CLUSTERED 
+(
+    [Tracker_Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Users_details]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Users_details](
+    [Userid] [int] IDENTITY(1,1) NOT NULL,
+    [Username] [nvarchar](50) NOT NULL,
+    [Password] [nvarchar](50) NOT NULL,
+    [Email] [nvarchar](50) NOT NULL,
+    [Createdby] [int] NOT NULL,
+    [CreatedDate] [date] NOT NULL,
+    [Updatedby] [int] NULL,
+    [UpdatedDate] [date] NULL,
+    [IsActive] [bit] NOT NULL,
+CONSTRAINT [PK_Users_details] PRIMARY KEY CLUSTERED 
+(
+    [Userid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[ASETable] ON 
+GO
+INSERT [dbo].[ASETable] ([Tracker_Id], [Emp_Id], [Employee_Name], [Batch], [DOJ], [Location], [Status], [Educational_Qualification], [Branch], [FCA_L_PL_Prog], [FCA_L_PL_Score], [FCA_L_PL_Date], [TCB_Assigned], [TCB_Specialization], [Practice], [FCA_SE_1], [FCA_SE_2], [FCA_SE_3], [FCA_SE_Cleared_Date], [SE_Attempts], [TCB_Prog_Lang], [FCA_PL1], [FCA_PL2], [FCA_PL3], [FCA_PL_Cleared_Date], [PL_Attempts], [Hackathon_1_Feedback], [Hackathon_2_Feedback], [Prog_Lang_Training_Start], [Prog_Lang_Trg_End], [SCL_End], [FCA_Due_Date], [Training_Stage], [TCB_Trg_Start], [Stage_2_Start], [Stage_3_Start], [Stage_4_Start], [KenMAP_Level_3_Date1], [KenMAP_Level_3_Date2], [KenMAP_Level_3_Rating], [Project], [Project_Start_Date]) VALUES (1, 12345, N'ABCD', 7, CAST(N'2023-01-10' AS Date), N'Bangalore', N'Under Training', N'BE', N'Computer Science', N'C', 55, CAST(N'2023-01-27' AS Date), N'Application Dev - .net', N'C#', N'App', 34, 45, 65, CAST(N'2023-01-27' AS Date), 3, N'C#', 45, 49, 59, CAST(N'2023-01-27' AS Date), 3, N'Average', N'Average', CAST(N'2023-01-12' AS Date), CAST(N'2023-01-27' AS Date), CAST(N'2023-01-27' AS Date), CAST(N'2023-01-27' AS Date), 1, CAST(N'2023-01-12' AS Date), CAST(N'2023-01-12' AS Date), CAST(N'2023-01-12' AS Date), CAST(N'2023-01-12' AS Date), CAST(N'2023-01-27' AS Date), CAST(N'2023-01-27' AS Date), 3, N'ABB', CAST(N'2023-01-27' AS Date))
+GO
+INSERT [dbo].[ASETable] ([Tracker_Id], [Emp_Id], [Employee_Name], [Batch], [DOJ], [Location], [Status], [Educational_Qualification], [Branch], [FCA_L_PL_Prog], [FCA_L_PL_Score], [FCA_L_PL_Date], [TCB_Assigned], [TCB_Specialization], [Practice], [FCA_SE_1], [FCA_SE_2], [FCA_SE_3], [FCA_SE_Cleared_Date], [SE_Attempts], [TCB_Prog_Lang], [FCA_PL1], [FCA_PL2], [FCA_PL3], [FCA_PL_Cleared_Date], [PL_Attempts], [Hackathon_1_Feedback], [Hackathon_2_Feedback], [Prog_Lang_Training_Start], [Prog_Lang_Trg_End], [SCL_End], [FCA_Due_Date], [Training_Stage], [TCB_Trg_Start], [Stage_2_Start], [Stage_3_Start], [Stage_4_Start], [KenMAP_Level_3_Date1], [KenMAP_Level_3_Date2], [KenMAP_Level_3_Rating], [Project], [Project_Start_Date]) VALUES (2, 12346, N'EFGH', 7, CAST(N'2023-01-10' AS Date), N'Bangalore', N'Under Training', N'BE', N'Computer Science', N'C', 55, CAST(N'2023-01-27' AS Date), N'Application Dev - .net', N'C#', N'App', 34, 45, 65, CAST(N'2023-01-27' AS Date), 3, N'C#', 45, 49, 59, CAST(N'2023-01-27' AS Date), 3, N'Average', N'Average', CAST(N'2023-01-12' AS Date), CAST(N'2023-01-27' AS Date), CAST(N'2023-01-27' AS Date), CAST(N'2023-01-27' AS Date), 1, CAST(N'2023-01-12' AS Date), CAST(N'2023-01-12' AS Date), CAST(N'2023-01-12' AS Date), CAST(N'2023-01-12' AS Date), CAST(N'2023-01-27' AS Date), CAST(N'2023-01-27' AS Date), 3, N'ABB', CAST(N'2023-01-27' AS Date))
+GO
+INSERT [dbo].[ASETable] ([Tracker_Id], [Emp_Id], [Employee_Name], [Batch], [DOJ], [Location], [Status], [Educational_Qualification], [Branch], [FCA_L_PL_Prog], [FCA_L_PL_Score], [FCA_L_PL_Date], [TCB_Assigned], [TCB_Specialization], [Practice], [FCA_SE_1], [FCA_SE_2], [FCA_SE_3], [FCA_SE_Cleared_Date], [SE_Attempts], [TCB_Prog_Lang], [FCA_PL1], [FCA_PL2], [FCA_PL3], [FCA_PL_Cleared_Date], [PL_Attempts], [Hackathon_1_Feedback], [Hackathon_2_Feedback], [Prog_Lang_Training_Start], [Prog_Lang_Trg_End], [SCL_End], [FCA_Due_Date], [Training_Stage], [TCB_Trg_Start], [Stage_2_Start], [Stage_3_Start], [Stage_4_Start], [KenMAP_Level_3_Date1], [KenMAP_Level_3_Date2], [KenMAP_Level_3_Rating], [Project], [Project_Start_Date]) VALUES (3, 12347, N'IJKL', 7, CAST(N'2023-01-10' AS Date), N'Bangalore', N'Under Training', N'BE', N'Computer Science', N'C', 55, CAST(N'2023-01-27' AS Date), N'Application Dev - .net', N'C#', N'App', 34, 45, 65, CAST(N'2023-01-27' AS Date), 3, N'C#', 45, 49, 59, CAST(N'2023-01-27' AS Date), 3, N'Average', N'Average', CAST(N'2023-01-12' AS Date), CAST(N'2023-01-27' AS Date), CAST(N'2023-01-27' AS Date), CAST(N'2023-01-27' AS Date), 1, CAST(N'2023-01-12' AS Date), CAST(N'2023-01-12' AS Date), CAST(N'2023-01-12' AS Date), CAST(N'2023-01-12' AS Date), CAST(N'2023-01-27' AS Date), CAST(N'2023-01-27' AS Date), 3, N'ABB', CAST(N'2023-01-27' AS Date))
+GO
+INSERT [dbo].[ASETable] ([Tracker_Id], [Emp_Id], [Employee_Name], [Batch], [DOJ], [Location], [Status], [Educational_Qualification], [Branch], [FCA_L_PL_Prog], [FCA_L_PL_Score], [FCA_L_PL_Date], [TCB_Assigned], [TCB_Specialization], [Practice], [FCA_SE_1], [FCA_SE_2], [FCA_SE_3], [FCA_SE_Cleared_Date], [SE_Attempts], [TCB_Prog_Lang], [FCA_PL1], [FCA_PL2], [FCA_PL3], [FCA_PL_Cleared_Date], [PL_Attempts], [Hackathon_1_Feedback], [Hackathon_2_Feedback], [Prog_Lang_Training_Start], [Prog_Lang_Trg_End], [SCL_End], [FCA_Due_Date], [Training_Stage], [TCB_Trg_Start], [Stage_2_Start], [Stage_3_Start], [Stage_4_Start], [KenMAP_Level_3_Date1], [KenMAP_Level_3_Date2], [KenMAP_Level_3_Rating], [Project], [Project_Start_Date]) VALUES (4, 12348, N'MNOP', 7, CAST(N'2023-01-10' AS Date), N'Bangalore', N'Under Training', N'BE', N'Computer Science', N'C', 55, CAST(N'2023-01-27' AS Date), N'Application Dev - .net', N'C#', N'App', 34, 45, 65, CAST(N'2023-01-27' AS Date), 3, N'C#', 45, 49, 59, CAST(N'2023-01-27' AS Date), 3, N'Average', N'Average', CAST(N'2023-01-12' AS Date), CAST(N'2023-01-27' AS Date), CAST(N'2023-01-27' AS Date), CAST(N'2023-01-27' AS Date), 1, CAST(N'2023-01-12' AS Date), CAST(N'2023-01-12' AS Date), CAST(N'2023-01-12' AS Date), CAST(N'2023-01-12' AS Date), CAST(N'2023-01-27' AS Date), CAST(N'2023-01-27' AS Date), 3, N'ABB', CAST(N'2023-01-27' AS Date))
+GO
+SET IDENTITY_INSERT [dbo].[ASETable] OFF
+GO
+INSERT [dbo].[Attempts] ([Attempt]) VALUES (N'1st Attempt')
+GO
+INSERT [dbo].[Attempts] ([Attempt]) VALUES (N'2nd Attempt')
+GO
+INSERT [dbo].[Attempts] ([Attempt]) VALUES (N'3rd Attempt')
+GO
+INSERT [dbo].[Batch 1] ([FCA_PL], [Num_Emp_Cleared_FCA_PL], [FCA_SE], [Num_Emp_Cleared_FCA_SE]) VALUES (N'1st Attempt', 0, N'1st Attempt', 1)
+GO
+INSERT [dbo].[Batch 1] ([FCA_PL], [Num_Emp_Cleared_FCA_PL], [FCA_SE], [Num_Emp_Cleared_FCA_SE]) VALUES (N'2nd Attempt', 3, N'2nd Attempt', 2)
+GO
+INSERT [dbo].[Batch 1] ([FCA_PL], [Num_Emp_Cleared_FCA_PL], [FCA_SE], [Num_Emp_Cleared_FCA_SE]) VALUES (N'3rd Attempt', 0, N'3rd Attempt', 0)
+GO
+INSERT [dbo].[Batch 2] ([FCA_PL], [Num_Emp_Cleared_FCA_PL], [FCA_SE], [Num_Emp_Cleared_FCA_SE]) VALUES (N'1st Attempt', 0, N'1st Attempt', 1)
+GO
+INSERT [dbo].[Batch 2] ([FCA_PL], [Num_Emp_Cleared_FCA_PL], [FCA_SE], [Num_Emp_Cleared_FCA_SE]) VALUES (N'2nd Attempt', 1, N'2nd Attempt', 0)
+GO
+INSERT [dbo].[Batch 2] ([FCA_PL], [Num_Emp_Cleared_FCA_PL], [FCA_SE], [Num_Emp_Cleared_FCA_SE]) VALUES (N'3rd Attempt', 0, N'3rd Attempt', 0)
+GO
+INSERT [dbo].[Batch 3] ([FCA_PL], [Num_Emp_Cleared_FCA_PL], [FCA_SE], [Num_Emp_Cleared_FCA_SE]) VALUES (N'1st Attempt', 0, N'1st Attempt', 0)
+GO
+INSERT [dbo].[Batch 3] ([FCA_PL], [Num_Emp_Cleared_FCA_PL], [FCA_SE], [Num_Emp_Cleared_FCA_SE]) VALUES (N'2nd Attempt', 0, N'2nd Attempt', 1)
+GO
+INSERT [dbo].[Batch 3] ([FCA_PL], [Num_Emp_Cleared_FCA_PL], [FCA_SE], [Num_Emp_Cleared_FCA_SE]) VALUES (N'3rd Attempt', 1, N'3rd Attempt', 0)
+GO
+INSERT [dbo].[Batch 4] ([FCA_PL], [Num_Emp_Cleared_FCA_PL], [FCA_SE], [Num_Emp_Cleared_FCA_SE]) VALUES (N'1st Attempt', 2, N'1st Attempt', 0)
+GO
+INSERT [dbo].[Batch 4] ([FCA_PL], [Num_Emp_Cleared_FCA_PL], [FCA_SE], [Num_Emp_Cleared_FCA_SE]) VALUES (N'2nd Attempt', 0, N'2nd Attempt', 2)
+GO
+INSERT [dbo].[Batch 4] ([FCA_PL], [Num_Emp_Cleared_FCA_PL], [FCA_SE], [Num_Emp_Cleared_FCA_SE]) VALUES (N'3rd Attempt', 0, N'3rd Attempt', 0)
+GO
+SET IDENTITY_INSERT [dbo].[FileLogTable] ON 
+GO
+INSERT [dbo].[FileLogTable] ([Sr_No], [FileName], [Success_Count], [Failed_Count], [Uploaded_By], [Uploaded_Date]) VALUES (1, N'TrackerTemplate (1).xlsx', 0, 1, 35, CAST(N'2023-01-27' AS Date))
+GO
+INSERT [dbo].[FileLogTable] ([Sr_No], [FileName], [Success_Count], [Failed_Count], [Uploaded_By], [Uploaded_Date]) VALUES (2, N'TrackerTemplate (1).xlsx', 0, 1, 35, CAST(N'2023-01-27' AS Date))
+GO
+INSERT [dbo].[FileLogTable] ([Sr_No], [FileName], [Success_Count], [Failed_Count], [Uploaded_By], [Uploaded_Date]) VALUES (3, N'TrackerTemplate (1).xlsx', 0, 1, 35, CAST(N'2023-01-27' AS Date))
+GO
+INSERT [dbo].[FileLogTable] ([Sr_No], [FileName], [Success_Count], [Failed_Count], [Uploaded_By], [Uploaded_Date]) VALUES (4, N'TrackerTemplate (1).xlsx', 0, 1, 35, CAST(N'2023-01-27' AS Date))
+GO
+INSERT [dbo].[FileLogTable] ([Sr_No], [FileName], [Success_Count], [Failed_Count], [Uploaded_By], [Uploaded_Date]) VALUES (5, N'TrackerTemplate.xlsx', 0, 4, 35, CAST(N'2023-01-27' AS Date))
+GO
+INSERT [dbo].[FileLogTable] ([Sr_No], [FileName], [Success_Count], [Failed_Count], [Uploaded_By], [Uploaded_Date]) VALUES (6, N'TrackerTemplate.xlsx', 0, 4, 35, CAST(N'2023-01-27' AS Date))
+GO
+INSERT [dbo].[FileLogTable] ([Sr_No], [FileName], [Success_Count], [Failed_Count], [Uploaded_By], [Uploaded_Date]) VALUES (7, N'TrackerTemplate.xlsx', 0, 4, 35, CAST(N'2023-01-27' AS Date))
+GO
+INSERT [dbo].[FileLogTable] ([Sr_No], [FileName], [Success_Count], [Failed_Count], [Uploaded_By], [Uploaded_Date]) VALUES (8, N'TrackerTemplate.xlsx', 0, 4, 35, CAST(N'2023-01-27' AS Date))
+GO
+INSERT [dbo].[FileLogTable] ([Sr_No], [FileName], [Success_Count], [Failed_Count], [Uploaded_By], [Uploaded_Date]) VALUES (9, N'TrackerTemplate.xlsx', 0, 4, 35, CAST(N'2023-01-27' AS Date))
+GO
+INSERT [dbo].[FileLogTable] ([Sr_No], [FileName], [Success_Count], [Failed_Count], [Uploaded_By], [Uploaded_Date]) VALUES (10, N'TrackerTemplate (2).xlsx', 4, 0, 35, CAST(N'2023-01-27' AS Date))
+GO
+SET IDENTITY_INSERT [dbo].[FileLogTable] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Role_Master_tbl] ON 
+GO
+INSERT [dbo].[Role_Master_tbl] ([RoleId], [Role Name], [Role Description], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [IsActive]) VALUES (1, N'Admin', N'admin', 1, CAST(N'2022-10-10' AS Date), 1, CAST(N'2022-10-10' AS Date), 1)
+GO
+INSERT [dbo].[Role_Master_tbl] ([RoleId], [Role Name], [Role Description], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [IsActive]) VALUES (2, N'Super Admin', N'Superadmin', 2, CAST(N'2022-10-10' AS Date), 2, CAST(N'2022-10-10' AS Date), 1)
+GO
+INSERT [dbo].[Role_Master_tbl] ([RoleId], [Role Name], [Role Description], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [IsActive]) VALUES (3, N'Normaluser', N'normaluser', 1, CAST(N'2022-10-10' AS Date), 1, CAST(N'2022-10-10' AS Date), 1)
+GO
+INSERT [dbo].[Role_Master_tbl] ([RoleId], [Role Name], [Role Description], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate], [IsActive]) VALUES (4, N'Management', N'management', 1, CAST(N'2022-10-10' AS Date), 1, CAST(N'2022-10-10' AS Date), 1)
+GO
+SET IDENTITY_INSERT [dbo].[Role_Master_tbl] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Rolemap_tbl] ON 
+GO
+INSERT [dbo].[Rolemap_tbl] ([RoleMApId], [user_id], [RoleId], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate]) VALUES (2, 17, 1, 1, CAST(N'2023-01-27' AS Date), 1, CAST(N'2023-01-27' AS Date))
+GO
+INSERT [dbo].[Rolemap_tbl] ([RoleMApId], [user_id], [RoleId], [CreatedBy], [CreatedDate], [UpdatedBy], [UpdatedDate]) VALUES (3, 35, 3, 35, CAST(N'2023-01-27' AS Date), 35, CAST(N'2023-01-27' AS Date))
+GO
+SET IDENTITY_INSERT [dbo].[Rolemap_tbl] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Tracker] ON 
+GO
+INSERT [dbo].[Tracker] ([Tracker_Id], [Emp_Id], [Employee_Name], [Batch], [DOJ], [Location], [Status], [Educational_Qualification], [Branch], [FCA_L_PL_Prog], [FCA_L_PL_Score], [FCA_L_PL_Date], [TCB_Assigned], [TCB_Specialization], [Practice], [FCA_SE_1], [FCA_SE_2], [FCA_SE_3], [FCA_SE_Cleared_Date], [SE_Attempts], [TCB_Prog_Lang], [FCA_PL1], [FCA_PL2], [FCA_PL3], [FCA_PL_Cleared_Date], [PL_Attempts], [Hackathon_1_Feedback], [Hackathon_2_Feedback], [Prog_Lang_Training_Start], [Prog_Lang_Trg_End], [SCL_End], [FCA_Due_Date], [Training_Stage], [TCB_Trg_Start], [Stage_2_Start], [Stage_3_Start], [Stage_4_Start], [KenMAP_Level_3_Date1], [KenMAP_Level_3_Date2], [Project], [Project_Start_Date], [isActive], [KenMap_Level_3_Rating], [Comments]) VALUES (1, 212723, N'Suraj', 1, CAST(N'2022-08-01' AS Date), N'Bengaluru', N'ASE', N'B.E.', N'CSE', N'Java', 34, CAST(N'2022-08-09' AS Date), N'Kernel', N'Modem', N'abc', 45, 54, 0, CAST(N'2022-08-11' AS Date), 2, N'C++', 34, 50, 0, CAST(N'2022-09-11' AS Date), 2, N'Not cleared', N'cleared', CAST(N'2022-09-30' AS Date), CAST(N'2022-11-10' AS Date), CAST(N'2022-12-10' AS Date), CAST(N'2022-11-10' AS Date), 2, CAST(N'2022-12-12' AS Date), CAST(N'2022-12-15' AS Date), CAST(N'2022-12-26' AS Date), CAST(N'2023-01-04' AS Date), CAST(N'2023-01-14' AS Date), CAST(N'2023-02-14' AS Date), N'ESL', CAST(N'2023-02-15' AS Date), NULL, 4, NULL)
+GO
+INSERT [dbo].[Tracker] ([Tracker_Id], [Emp_Id], [Employee_Name], [Batch], [DOJ], [Location], [Status], [Educational_Qualification], [Branch], [FCA_L_PL_Prog], [FCA_L_PL_Score], [FCA_L_PL_Date], [TCB_Assigned], [TCB_Specialization], [Practice], [FCA_SE_1], [FCA_SE_2], [FCA_SE_3], [FCA_SE_Cleared_Date], [SE_Attempts], [TCB_Prog_Lang], [FCA_PL1], [FCA_PL2], [FCA_PL3], [FCA_PL_Cleared_Date], [PL_Attempts], [Hackathon_1_Feedback], [Hackathon_2_Feedback], [Prog_Lang_Training_Start], [Prog_Lang_Trg_End], [SCL_End], [FCA_Due_Date], [Training_Stage], [TCB_Trg_Start], [Stage_2_Start], [Stage_3_Start], [Stage_4_Start], [KenMAP_Level_3_Date1], [KenMAP_Level_3_Date2], [Project], [Project_Start_Date], [isActive], [KenMap_Level_3_Rating], [Comments]) VALUES (7, 212724, N'Prasad', 1, CAST(N'2022-03-08' AS Date), N'Bengaluru', N'Under Training', N'B.E', N'ISE', N'Python', 20, CAST(N'2022-08-16' AS Date), N'Automation Testing', N'Testing', N'ASE', 50, 0, 0, CAST(N'2022-08-20' AS Date), 1, N'Python', 45, 55, 0, CAST(N'2022-11-01' AS Date), 2, N'Not Cleared', N'Cleared', CAST(N'2022-11-10' AS Date), CAST(N'2022-12-20' AS Date), CAST(N'2022-12-15' AS Date), CAST(N'2022-10-20' AS Date), 3, CAST(N'2022-10-20' AS Date), CAST(N'2022-10-10' AS Date), CAST(N'2022-11-15' AS Date), CAST(N'2022-12-10' AS Date), CAST(N'2023-01-05' AS Date), CAST(N'2023-01-21' AS Date), N'Mobile Development', CAST(N'2023-02-21' AS Date), 1, 5, NULL)
+GO
+INSERT [dbo].[Tracker] ([Tracker_Id], [Emp_Id], [Employee_Name], [Batch], [DOJ], [Location], [Status], [Educational_Qualification], [Branch], [FCA_L_PL_Prog], [FCA_L_PL_Score], [FCA_L_PL_Date], [TCB_Assigned], [TCB_Specialization], [Practice], [FCA_SE_1], [FCA_SE_2], [FCA_SE_3], [FCA_SE_Cleared_Date], [SE_Attempts], [TCB_Prog_Lang], [FCA_PL1], [FCA_PL2], [FCA_PL3], [FCA_PL_Cleared_Date], [PL_Attempts], [Hackathon_1_Feedback], [Hackathon_2_Feedback], [Prog_Lang_Training_Start], [Prog_Lang_Trg_End], [SCL_End], [FCA_Due_Date], [Training_Stage], [TCB_Trg_Start], [Stage_2_Start], [Stage_3_Start], [Stage_4_Start], [KenMAP_Level_3_Date1], [KenMAP_Level_3_Date2], [Project], [Project_Start_Date], [isActive], [KenMap_Level_3_Rating], [Comments]) VALUES (8, 212928, N'Shivali', 3, CAST(N'2022-09-01' AS Date), N'Pune', N'Training', N'B.E.', N'CSE', N'C', 38, CAST(N'2022-09-11' AS Date), N'Data Scientist', N'Data Engineer', N'ase', 20, 56, NULL, CAST(N'2022-09-18' AS Date), 2, N'Python', 30, 45, 60, CAST(N'2022-09-25' AS Date), 3, N'Cleared', NULL, CAST(N'2022-10-25' AS Date), CAST(N'2022-11-10' AS Date), CAST(N'2022-11-15' AS Date), CAST(N'2022-11-25' AS Date), 2, CAST(N'2022-12-01' AS Date), CAST(N'2022-12-10' AS Date), CAST(N'2022-12-17' AS Date), CAST(N'2022-12-20' AS Date), CAST(N'2023-01-20' AS Date), CAST(N'2023-02-01' AS Date), N'ESL', CAST(N'2023-02-10' AS Date), 1, 5, NULL)
+GO
+INSERT [dbo].[Tracker] ([Tracker_Id], [Emp_Id], [Employee_Name], [Batch], [DOJ], [Location], [Status], [Educational_Qualification], [Branch], [FCA_L_PL_Prog], [FCA_L_PL_Score], [FCA_L_PL_Date], [TCB_Assigned], [TCB_Specialization], [Practice], [FCA_SE_1], [FCA_SE_2], [FCA_SE_3], [FCA_SE_Cleared_Date], [SE_Attempts], [TCB_Prog_Lang], [FCA_PL1], [FCA_PL2], [FCA_PL3], [FCA_PL_Cleared_Date], [PL_Attempts], [Hackathon_1_Feedback], [Hackathon_2_Feedback], [Prog_Lang_Training_Start], [Prog_Lang_Trg_End], [SCL_End], [FCA_Due_Date], [Training_Stage], [TCB_Trg_Start], [Stage_2_Start], [Stage_3_Start], [Stage_4_Start], [KenMAP_Level_3_Date1], [KenMAP_Level_3_Date2], [Project], [Project_Start_Date], [isActive], [KenMap_Level_3_Rating], [Comments]) VALUES (9, 212928, N'Aman', 5, CAST(N'2022-09-10' AS Date), N'Kolkata', N'Training', N'MCA', NULL, N'Java', 28, CAST(N'2022-09-11' AS Date), N'Kernel and Drivers', N'Modem', N'ase', 10, 36, 68, CAST(N'2022-10-18' AS Date), 3, N'C++', 30, 45, 60, CAST(N'2022-09-25' AS Date), 3, N'Not Cleared', N'Cleared', CAST(N'2022-10-25' AS Date), CAST(N'2022-11-10' AS Date), CAST(N'2022-11-15' AS Date), CAST(N'2022-11-25' AS Date), 2, CAST(N'2022-12-01' AS Date), CAST(N'2022-12-10' AS Date), CAST(N'2022-12-17' AS Date), CAST(N'2022-12-20' AS Date), CAST(N'2023-01-20' AS Date), CAST(N'2023-02-01' AS Date), N'ESL', CAST(N'2023-02-10' AS Date), 1, 5, NULL)
+GO
+INSERT [dbo].[Tracker] ([Tracker_Id], [Emp_Id], [Employee_Name], [Batch], [DOJ], [Location], [Status], [Educational_Qualification], [Branch], [FCA_L_PL_Prog], [FCA_L_PL_Score], [FCA_L_PL_Date], [TCB_Assigned], [TCB_Specialization], [Practice], [FCA_SE_1], [FCA_SE_2], [FCA_SE_3], [FCA_SE_Cleared_Date], [SE_Attempts], [TCB_Prog_Lang], [FCA_PL1], [FCA_PL2], [FCA_PL3], [FCA_PL_Cleared_Date], [PL_Attempts], [Hackathon_1_Feedback], [Hackathon_2_Feedback], [Prog_Lang_Training_Start], [Prog_Lang_Trg_End], [SCL_End], [FCA_Due_Date], [Training_Stage], [TCB_Trg_Start], [Stage_2_Start], [Stage_3_Start], [Stage_4_Start], [KenMAP_Level_3_Date1], [KenMAP_Level_3_Date2], [Project], [Project_Start_Date], [isActive], [KenMap_Level_3_Rating], [Comments]) VALUES (10, 212928, N'Ramesh', 4, CAST(N'2022-09-05' AS Date), N'Bengaluru', N'Training', N'B.E.', N'ISE', N'C', 48, CAST(N'2022-09-11' AS Date), N'.net', N'App Dev', N'ase', 10, 56, NULL, CAST(N'2022-10-18' AS Date), 2, N'C#', 50, NULL, NULL, CAST(N'2022-09-25' AS Date), 1, N'Cleared', NULL, CAST(N'2022-10-25' AS Date), CAST(N'2022-11-10' AS Date), CAST(N'2022-11-15' AS Date), CAST(N'2022-11-25' AS Date), 2, CAST(N'2022-12-01' AS Date), CAST(N'2022-12-10' AS Date), CAST(N'2022-12-17' AS Date), CAST(N'2022-12-20' AS Date), CAST(N'2023-01-20' AS Date), CAST(N'2023-02-01' AS Date), N'ESL', CAST(N'2023-02-10' AS Date), 0, 4, NULL)
+GO
+INSERT [dbo].[Tracker] ([Tracker_Id], [Emp_Id], [Employee_Name], [Batch], [DOJ], [Location], [Status], [Educational_Qualification], [Branch], [FCA_L_PL_Prog], [FCA_L_PL_Score], [FCA_L_PL_Date], [TCB_Assigned], [TCB_Specialization], [Practice], [FCA_SE_1], [FCA_SE_2], [FCA_SE_3], [FCA_SE_Cleared_Date], [SE_Attempts], [TCB_Prog_Lang], [FCA_PL1], [FCA_PL2], [FCA_PL3], [FCA_PL_Cleared_Date], [PL_Attempts], [Hackathon_1_Feedback], [Hackathon_2_Feedback], [Prog_Lang_Training_Start], [Prog_Lang_Trg_End], [SCL_End], [FCA_Due_Date], [Training_Stage], [TCB_Trg_Start], [Stage_2_Start], [Stage_3_Start], [Stage_4_Start], [KenMAP_Level_3_Date1], [KenMAP_Level_3_Date2], [Project], [Project_Start_Date], [isActive], [KenMap_Level_3_Rating], [Comments]) VALUES (11, 212758, N'Ravi', 2, CAST(N'2022-08-16' AS Date), N'Bengaluru', N'Training', N'B.E.', N'ECE', N'Python', 36, CAST(N'2022-08-29' AS Date), N'Android', N'Mob App Dev', N'ase', 50, NULL, NULL, CAST(N'2022-10-18' AS Date), 1, N'Java', 40, 56, NULL, CAST(N'2022-09-25' AS Date), 2, N'Cleared', NULL, CAST(N'2022-10-25' AS Date), CAST(N'2022-11-10' AS Date), CAST(N'2022-11-15' AS Date), CAST(N'2022-11-25' AS Date), 2, CAST(N'2022-12-01' AS Date), CAST(N'2022-12-10' AS Date), CAST(N'2022-12-17' AS Date), CAST(N'2022-12-20' AS Date), CAST(N'2023-01-20' AS Date), CAST(N'2023-02-01' AS Date), N'ESL', CAST(N'2023-02-10' AS Date), 0, 5, NULL)
+GO
+INSERT [dbo].[Tracker] ([Tracker_Id], [Emp_Id], [Employee_Name], [Batch], [DOJ], [Location], [Status], [Educational_Qualification], [Branch], [FCA_L_PL_Prog], [FCA_L_PL_Score], [FCA_L_PL_Date], [TCB_Assigned], [TCB_Specialization], [Practice], [FCA_SE_1], [FCA_SE_2], [FCA_SE_3], [FCA_SE_Cleared_Date], [SE_Attempts], [TCB_Prog_Lang], [FCA_PL1], [FCA_PL2], [FCA_PL3], [FCA_PL_Cleared_Date], [PL_Attempts], [Hackathon_1_Feedback], [Hackathon_2_Feedback], [Prog_Lang_Training_Start], [Prog_Lang_Trg_End], [SCL_End], [FCA_Due_Date], [Training_Stage], [TCB_Trg_Start], [Stage_2_Start], [Stage_3_Start], [Stage_4_Start], [KenMAP_Level_3_Date1], [KenMAP_Level_3_Date2], [Project], [Project_Start_Date], [isActive], [KenMap_Level_3_Rating], [Comments]) VALUES (13, 212928, N'Ramesh New', 4, CAST(N'2022-09-05' AS Date), N'Bengaluru', N'Training', N'B.E.', N'ISE', N'C', 48, CAST(N'2022-09-11' AS Date), N'.net', N'App Dev', N'ase', 10, 56, NULL, CAST(N'2022-10-18' AS Date), 2, N'C#', 50, NULL, NULL, CAST(N'2022-09-25' AS Date), 1, N'Cleared', NULL, CAST(N'2022-10-25' AS Date), CAST(N'2022-11-10' AS Date), CAST(N'2022-11-15' AS Date), CAST(N'2022-11-25' AS Date), 2, CAST(N'2022-12-01' AS Date), CAST(N'2022-12-10' AS Date), CAST(N'2022-12-17' AS Date), CAST(N'2022-12-20' AS Date), CAST(N'2023-01-20' AS Date), CAST(N'2023-02-01' AS Date), N'ESL', CAST(N'2023-02-10' AS Date), 0, 3, NULL)
+GO
+INSERT [dbo].[Tracker] ([Tracker_Id], [Emp_Id], [Employee_Name], [Batch], [DOJ], [Location], [Status], [Educational_Qualification], [Branch], [FCA_L_PL_Prog], [FCA_L_PL_Score], [FCA_L_PL_Date], [TCB_Assigned], [TCB_Specialization], [Practice], [FCA_SE_1], [FCA_SE_2], [FCA_SE_3], [FCA_SE_Cleared_Date], [SE_Attempts], [TCB_Prog_Lang], [FCA_PL1], [FCA_PL2], [FCA_PL3], [FCA_PL_Cleared_Date], [PL_Attempts], [Hackathon_1_Feedback], [Hackathon_2_Feedback], [Prog_Lang_Training_Start], [Prog_Lang_Trg_End], [SCL_End], [FCA_Due_Date], [Training_Stage], [TCB_Trg_Start], [Stage_2_Start], [Stage_3_Start], [Stage_4_Start], [KenMAP_Level_3_Date1], [KenMAP_Level_3_Date2], [Project], [Project_Start_Date], [isActive], [KenMap_Level_3_Rating], [Comments]) VALUES (16, 212998, N'Rahim', 1, CAST(N'2022-08-03' AS Date), N'Bengaluru', N'Under Training', NULL, NULL, NULL, NULL, NULL, N'Android', NULL, NULL, 36, 54, NULL, NULL, NULL, N'Java', 34, 56, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, CAST(N'2022-09-09' AS Date), NULL, N'Internal', NULL, 1, 5, NULL)
+GO
+SET IDENTITY_INSERT [dbo].[Tracker] OFF
+GO
+SET IDENTITY_INSERT [dbo].[TrackerT] ON 
+GO
+INSERT [dbo].[TrackerT] ([Tracker_Id], [IsActive], [Emp_Id], [Employee_Name], [Batch], [DOJ], [Location], [Status], [Educational_Qualification], [Branch], [FCA_L_PL_Prog], [FCA_L_PL_Score], [FCA_L_PL_Date], [TCB_Assigned], [TCB_Specialization], [Practice], [FCA_SE_1], [FCA_SE_2], [FCA_SE_3], [FCA_SE_Cleared_Date], [SE_Attempts], [TCB_Prog_Lang], [FCA_PL1], [FCA_PL2], [FCA_PL3], [FCA_PL_Cleared_Date], [PL_Attempts], [Hackathon_1_Feedback], [Hackathon_2_Feedback], [Prog_Lang_Training_Start], [Prog_Lang_Trg_End], [SCL_End], [FCA_Due_Date], [Training_Stage], [TCB_Trg_Start], [Stage_2_Start], [Stage_3_Start], [Stage_4_Start], [KenMAP_Level_3_Date1], [KenMAP_Level_3_Date2], [Project], [Project_Start_Date], [KenMap_Level_3_Rating], [Comments]) VALUES (1, 1, 212731, N'Ashiwni', 2, CAST(N'2022-01-22' AS Date), N'Pune', N'Under Training', N'B.tech', N'CSE', N'C', 22, CAST(N'2020-02-22' AS Date), N'dot net', N'developer', N'c', 55, 88, 99, CAST(N'2022-11-12' AS Date), 2, N'c', 25, 55, 0, CAST(N'2022-06-12' AS Date), 2, N'bad', N'good', CAST(N'2023-06-08' AS Date), CAST(N'2023-06-08' AS Date), CAST(N'2022-09-15' AS Date), CAST(N'2022-08-12' AS Date), 1, CAST(N'2022-09-15' AS Date), CAST(N'2022-10-18' AS Date), CAST(N'2022-11-03' AS Date), CAST(N'2022-12-05' AS Date), CAST(N'2022-12-28' AS Date), CAST(N'2023-01-25' AS Date), N'Mobile App Development', CAST(N'2023-02-02' AS Date), NULL, NULL)
+GO
+INSERT [dbo].[TrackerT] ([Tracker_Id], [IsActive], [Emp_Id], [Employee_Name], [Batch], [DOJ], [Location], [Status], [Educational_Qualification], [Branch], [FCA_L_PL_Prog], [FCA_L_PL_Score], [FCA_L_PL_Date], [TCB_Assigned], [TCB_Specialization], [Practice], [FCA_SE_1], [FCA_SE_2], [FCA_SE_3], [FCA_SE_Cleared_Date], [SE_Attempts], [TCB_Prog_Lang], [FCA_PL1], [FCA_PL2], [FCA_PL3], [FCA_PL_Cleared_Date], [PL_Attempts], [Hackathon_1_Feedback], [Hackathon_2_Feedback], [Prog_Lang_Training_Start], [Prog_Lang_Trg_End], [SCL_End], [FCA_Due_Date], [Training_Stage], [TCB_Trg_Start], [Stage_2_Start], [Stage_3_Start], [Stage_4_Start], [KenMAP_Level_3_Date1], [KenMAP_Level_3_Date2], [Project], [Project_Start_Date], [KenMap_Level_3_Rating], [Comments]) VALUES (2, 1, 212732, N'Shivali', 2, CAST(N'2022-01-22' AS Date), N'Pune', N'Under Training', N'B.tech', N'ISE', N'C', 22, CAST(N'2020-02-22' AS Date), N'dot net', N'developer', N'c', 55, 88, 99, CAST(N'2022-11-12' AS Date), 2, N'c', 35, 60, 0, CAST(N'2022-06-12' AS Date), 2, N'bad', N'good', CAST(N'2023-06-08' AS Date), CAST(N'2023-06-08' AS Date), CAST(N'2022-09-15' AS Date), CAST(N'2022-08-12' AS Date), 1, CAST(N'2022-09-15' AS Date), CAST(N'2022-10-18' AS Date), CAST(N'2022-11-03' AS Date), CAST(N'2022-12-05' AS Date), CAST(N'2022-12-28' AS Date), CAST(N'2023-01-25' AS Date), N'Mobile App Development', CAST(N'2023-02-02' AS Date), NULL, NULL)
+GO
+INSERT [dbo].[TrackerT] ([Tracker_Id], [IsActive], [Emp_Id], [Employee_Name], [Batch], [DOJ], [Location], [Status], [Educational_Qualification], [Branch], [FCA_L_PL_Prog], [FCA_L_PL_Score], [FCA_L_PL_Date], [TCB_Assigned], [TCB_Specialization], [Practice], [FCA_SE_1], [FCA_SE_2], [FCA_SE_3], [FCA_SE_Cleared_Date], [SE_Attempts], [TCB_Prog_Lang], [FCA_PL1], [FCA_PL2], [FCA_PL3], [FCA_PL_Cleared_Date], [PL_Attempts], [Hackathon_1_Feedback], [Hackathon_2_Feedback], [Prog_Lang_Training_Start], [Prog_Lang_Trg_End], [SCL_End], [FCA_Due_Date], [Training_Stage], [TCB_Trg_Start], [Stage_2_Start], [Stage_3_Start], [Stage_4_Start], [KenMAP_Level_3_Date1], [KenMAP_Level_3_Date2], [Project], [Project_Start_Date], [KenMap_Level_3_Rating], [Comments]) VALUES (3, 1, 212733, N'Prateeksha', 2, CAST(N'2022-01-22' AS Date), N'Bengaluru', N'Under Training', N'B.tech', N'ECE', N'C', 22, CAST(N'2020-02-22' AS Date), N'dot net', N'developer', N'c', 55, 88, 99, CAST(N'2022-11-12' AS Date), 2, N'c', 38, 50, 0, CAST(N'2022-06-12' AS Date), 2, N'bad', N'good', CAST(N'2023-06-08' AS Date), CAST(N'2023-06-08' AS Date), CAST(N'2022-09-15' AS Date), CAST(N'2022-08-12' AS Date), 2, CAST(N'2022-09-15' AS Date), CAST(N'2022-10-18' AS Date), CAST(N'2022-11-03' AS Date), CAST(N'2022-12-05' AS Date), CAST(N'2022-12-28' AS Date), CAST(N'2023-01-25' AS Date), N'Mobile App Development', CAST(N'2023-02-02' AS Date), NULL, NULL)
+GO
+INSERT [dbo].[TrackerT] ([Tracker_Id], [IsActive], [Emp_Id], [Employee_Name], [Batch], [DOJ], [Location], [Status], [Educational_Qualification], [Branch], [FCA_L_PL_Prog], [FCA_L_PL_Score], [FCA_L_PL_Date], [TCB_Assigned], [TCB_Specialization], [Practice], [FCA_SE_1], [FCA_SE_2], [FCA_SE_3], [FCA_SE_Cleared_Date], [SE_Attempts], [TCB_Prog_Lang], [FCA_PL1], [FCA_PL2], [FCA_PL3], [FCA_PL_Cleared_Date], [PL_Attempts], [Hackathon_1_Feedback], [Hackathon_2_Feedback], [Prog_Lang_Training_Start], [Prog_Lang_Trg_End], [SCL_End], [FCA_Due_Date], [Training_Stage], [TCB_Trg_Start], [Stage_2_Start], [Stage_3_Start], [Stage_4_Start], [KenMAP_Level_3_Date1], [KenMAP_Level_3_Date2], [Project], [Project_Start_Date], [KenMap_Level_3_Rating], [Comments]) VALUES (4, 1, 212734, N'Bhavana', 2, CAST(N'2022-01-22' AS Date), N'Kolkata', N'Under Training', N'B.tech', N'CSE', N'C', 22, CAST(N'2020-02-22' AS Date), N'dot net', N'developer', N'c', 55, 88, 99, CAST(N'2022-11-12' AS Date), 2, N'c', 43, 50, 0, CAST(N'2022-06-12' AS Date), 2, N'bad', N'good', CAST(N'2023-06-08' AS Date), CAST(N'2023-06-08' AS Date), CAST(N'2022-09-15' AS Date), CAST(N'2022-08-12' AS Date), 1, CAST(N'2022-09-15' AS Date), CAST(N'2022-10-18' AS Date), CAST(N'2022-11-03' AS Date), CAST(N'2022-12-05' AS Date), CAST(N'2022-12-28' AS Date), CAST(N'2023-01-25' AS Date), N'Mobile App Development', CAST(N'2023-02-02' AS Date), NULL, NULL)
+GO
+INSERT [dbo].[TrackerT] ([Tracker_Id], [IsActive], [Emp_Id], [Employee_Name], [Batch], [DOJ], [Location], [Status], [Educational_Qualification], [Branch], [FCA_L_PL_Prog], [FCA_L_PL_Score], [FCA_L_PL_Date], [TCB_Assigned], [TCB_Specialization], [Practice], [FCA_SE_1], [FCA_SE_2], [FCA_SE_3], [FCA_SE_Cleared_Date], [SE_Attempts], [TCB_Prog_Lang], [FCA_PL1], [FCA_PL2], [FCA_PL3], [FCA_PL_Cleared_Date], [PL_Attempts], [Hackathon_1_Feedback], [Hackathon_2_Feedback], [Prog_Lang_Training_Start], [Prog_Lang_Trg_End], [SCL_End], [FCA_Due_Date], [Training_Stage], [TCB_Trg_Start], [Stage_2_Start], [Stage_3_Start], [Stage_4_Start], [KenMAP_Level_3_Date1], [KenMAP_Level_3_Date2], [Project], [Project_Start_Date], [KenMap_Level_3_Rating], [Comments]) VALUES (5, 0, 212735, N'Kavana', 3, CAST(N'2022-01-22' AS Date), N'Pune', N'Resigned', N'B.tech', N'CSE', N'C', 22, CAST(N'2020-02-22' AS Date), N'dot net', N'developer', N'ASE', 35, 88, 0, CAST(N'2022-11-12' AS Date), 2, N'C', 25, 55, 0, CAST(N'2022-06-05' AS Date), 2, N'bad', N'good', CAST(N'2023-06-08' AS Date), CAST(N'2023-08-20' AS Date), CAST(N'2022-09-15' AS Date), CAST(N'2022-08-12' AS Date), 1, CAST(N'2022-09-10' AS Date), CAST(N'2022-10-18' AS Date), CAST(N'2022-11-03' AS Date), CAST(N'2022-12-05' AS Date), CAST(N'2022-12-26' AS Date), CAST(N'2023-01-26' AS Date), N'Mobile App Development', CAST(N'2023-02-02' AS Date), NULL, NULL)
+GO
+INSERT [dbo].[TrackerT] ([Tracker_Id], [IsActive], [Emp_Id], [Employee_Name], [Batch], [DOJ], [Location], [Status], [Educational_Qualification], [Branch], [FCA_L_PL_Prog], [FCA_L_PL_Score], [FCA_L_PL_Date], [TCB_Assigned], [TCB_Specialization], [Practice], [FCA_SE_1], [FCA_SE_2], [FCA_SE_3], [FCA_SE_Cleared_Date], [SE_Attempts], [TCB_Prog_Lang], [FCA_PL1], [FCA_PL2], [FCA_PL3], [FCA_PL_Cleared_Date], [PL_Attempts], [Hackathon_1_Feedback], [Hackathon_2_Feedback], [Prog_Lang_Training_Start], [Prog_Lang_Trg_End], [SCL_End], [FCA_Due_Date], [Training_Stage], [TCB_Trg_Start], [Stage_2_Start], [Stage_3_Start], [Stage_4_Start], [KenMAP_Level_3_Date1], [KenMAP_Level_3_Date2], [Project], [Project_Start_Date], [KenMap_Level_3_Rating], [Comments]) VALUES (6, 1, 212736, N'Pooja', 2, CAST(N'2022-01-01' AS Date), N'Pune', N'Under Training', N'B.tech', N'ISE', N'Java', 35, CAST(N'2020-02-22' AS Date), N'Framework', N'developer', N'ASE', 50, 0, 0, CAST(N'2022-11-13' AS Date), 1, N'C++', 35, 60, 0, CAST(N'2022-06-12' AS Date), 2, N'Not Cleared', N'good', CAST(N'2023-06-10' AS Date), CAST(N'2023-08-25' AS Date), CAST(N'2022-09-16' AS Date), CAST(N'2022-08-13' AS Date), 2, CAST(N'2022-09-15' AS Date), CAST(N'2022-10-19' AS Date), CAST(N'2022-11-05' AS Date), CAST(N'2022-12-15' AS Date), CAST(N'2022-12-28' AS Date), CAST(N'2023-01-25' AS Date), N'Internal Project', CAST(N'2023-02-03' AS Date), NULL, NULL)
+GO
+INSERT [dbo].[TrackerT] ([Tracker_Id], [IsActive], [Emp_Id], [Employee_Name], [Batch], [DOJ], [Location], [Status], [Educational_Qualification], [Branch], [FCA_L_PL_Prog], [FCA_L_PL_Score], [FCA_L_PL_Date], [TCB_Assigned], [TCB_Specialization], [Practice], [FCA_SE_1], [FCA_SE_2], [FCA_SE_3], [FCA_SE_Cleared_Date], [SE_Attempts], [TCB_Prog_Lang], [FCA_PL1], [FCA_PL2], [FCA_PL3], [FCA_PL_Cleared_Date], [PL_Attempts], [Hackathon_1_Feedback], [Hackathon_2_Feedback], [Prog_Lang_Training_Start], [Prog_Lang_Trg_End], [SCL_End], [FCA_Due_Date], [Training_Stage], [TCB_Trg_Start], [Stage_2_Start], [Stage_3_Start], [Stage_4_Start], [KenMAP_Level_3_Date1], [KenMAP_Level_3_Date2], [Project], [Project_Start_Date], [KenMap_Level_3_Rating], [Comments]) VALUES (7, 1, 212737, N'Pragati', 1, CAST(N'2021-12-01' AS Date), N'Bengaluru', N'Under Training', N'B.E', N'ECE', N'C++', 42, CAST(N'2020-02-22' AS Date), N'Testing', N'Testing', N'ASE', 55, 0, 0, CAST(N'2022-11-17' AS Date), 1, N'C#', 38, 50, 0, CAST(N'2022-06-15' AS Date), 2, N'Not up to the mark', N'good', CAST(N'2023-06-12' AS Date), CAST(N'2023-08-28' AS Date), CAST(N'2022-09-20' AS Date), CAST(N'2022-08-15' AS Date), 3, CAST(N'2022-09-20' AS Date), CAST(N'2022-10-20' AS Date), CAST(N'2022-11-10' AS Date), CAST(N'2022-12-10' AS Date), CAST(N'2022-12-27' AS Date), CAST(N'2023-01-28' AS Date), N'Internal Project', CAST(N'2023-02-04' AS Date), NULL, NULL)
+GO
+INSERT [dbo].[TrackerT] ([Tracker_Id], [IsActive], [Emp_Id], [Employee_Name], [Batch], [DOJ], [Location], [Status], [Educational_Qualification], [Branch], [FCA_L_PL_Prog], [FCA_L_PL_Score], [FCA_L_PL_Date], [TCB_Assigned], [TCB_Specialization], [Practice], [FCA_SE_1], [FCA_SE_2], [FCA_SE_3], [FCA_SE_Cleared_Date], [SE_Attempts], [TCB_Prog_Lang], [FCA_PL1], [FCA_PL2], [FCA_PL3], [FCA_PL_Cleared_Date], [PL_Attempts], [Hackathon_1_Feedback], [Hackathon_2_Feedback], [Prog_Lang_Training_Start], [Prog_Lang_Trg_End], [SCL_End], [FCA_Due_Date], [Training_Stage], [TCB_Trg_Start], [Stage_2_Start], [Stage_3_Start], [Stage_4_Start], [KenMAP_Level_3_Date1], [KenMAP_Level_3_Date2], [Project], [Project_Start_Date], [KenMap_Level_3_Rating], [Comments]) VALUES (8, 1, 212738, N'Charitra', 3, CAST(N'2022-01-22' AS Date), N'Kolkata', N'Under Training', N'B.tech', N'CSE', N'Python', 49, CAST(N'2020-02-22' AS Date), N'dot net', N'developer', N'ASE', 45, 60, 0, CAST(N'2022-11-21' AS Date), 2, N'Java', 43, 50, 0, CAST(N'2022-06-20' AS Date), 2, N'Low performance', N'good', CAST(N'2023-06-20' AS Date), CAST(N'2023-08-31' AS Date), CAST(N'2022-09-25' AS Date), CAST(N'2022-08-20' AS Date), 1, CAST(N'2022-09-25' AS Date), CAST(N'2022-10-28' AS Date), CAST(N'2022-11-23' AS Date), CAST(N'2022-12-25' AS Date), CAST(N'2022-12-30' AS Date), CAST(N'2023-01-30' AS Date), N'Mobile App Development', CAST(N'2023-02-02' AS Date), NULL, NULL)
+GO
+INSERT [dbo].[TrackerT] ([Tracker_Id], [IsActive], [Emp_Id], [Employee_Name], [Batch], [DOJ], [Location], [Status], [Educational_Qualification], [Branch], [FCA_L_PL_Prog], [FCA_L_PL_Score], [FCA_L_PL_Date], [TCB_Assigned], [TCB_Specialization], [Practice], [FCA_SE_1], [FCA_SE_2], [FCA_SE_3], [FCA_SE_Cleared_Date], [SE_Attempts], [TCB_Prog_Lang], [FCA_PL1], [FCA_PL2], [FCA_PL3], [FCA_PL_Cleared_Date], [PL_Attempts], [Hackathon_1_Feedback], [Hackathon_2_Feedback], [Prog_Lang_Training_Start], [Prog_Lang_Trg_End], [SCL_End], [FCA_Due_Date], [Training_Stage], [TCB_Trg_Start], [Stage_2_Start], [Stage_3_Start], [Stage_4_Start], [KenMAP_Level_3_Date1], [KenMAP_Level_3_Date2], [Project], [Project_Start_Date], [KenMap_Level_3_Rating], [Comments]) VALUES (9, NULL, 212551, N'Gururaj', NULL, CAST(N'2022-08-03' AS Date), N'Bengaluru', N'Under Training', NULL, NULL, NULL, NULL, NULL, N'dot net', NULL, N'Android', NULL, NULL, NULL, NULL, NULL, N'C#', NULL, NULL, NULL, NULL, NULL, N'Average', N'Average', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+GO
+SET IDENTITY_INSERT [dbo].[TrackerT] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Users_details] ON 
+GO
+INSERT [dbo].[Users_details] ([Userid], [Username], [Password], [Email], [Createdby], [CreatedDate], [Updatedby], [UpdatedDate], [IsActive]) VALUES (17, N'Girish', N'R2lyaXNoITEyMw==', N'preetham@gmail.com', 17, CAST(N'2023-04-01' AS Date), 17, CAST(N'2023-05-01' AS Date), 1)
+GO
+INSERT [dbo].[Users_details] ([Userid], [Username], [Password], [Email], [Createdby], [CreatedDate], [Updatedby], [UpdatedDate], [IsActive]) VALUES (35, N'Gururaj', N'R3VydXJhaiExMjM0', N'gururaj.kl@sasken.com', 1, CAST(N'2023-01-27' AS Date), 1, CAST(N'2023-01-27' AS Date), 0)
+GO
+SET IDENTITY_INSERT [dbo].[Users_details] OFF
+GO
+ALTER TABLE [dbo].[Tracker] ADD  DEFAULT ((1)) FOR [isActive]
+GO
+/****** Object:  StoredProcedure [dbo].[AddRollMap]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[AddRollMap]
+    @User_Id varchar(50),
+     @Roll_Id varchar(50),
+      @IsActive  bit,        
+         @CreatedBy varchar(50),       
+           @UpdatedBy varchar(50),   
+           @UpdatedDate Datetime,    
+            @CreatedDate Datetime   
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON;
+
+
+
+      insert into [dbo].[Rolemap_tbl] (RoleId,user_id,CreatedBy,CreatedDate,UpdatedBy,UpdatedDate) values (@Roll_id,@User_Id,@CreatedBy,@CreatedDate,@UpdatedBy,@UpdatedDate)
+
+
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[AddRollMaster]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[AddRollMaster]
+    @name varchar(50)=null,
+@CreatedBy varchar(50)=null,
+@CreatedDate DateTime=null,
+@UpdatedBy varchar(50)=null,
+@UpdatedDate DateTime=null,
+@desc varchar(50)=null,
+@isActive bit
+
+
+
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON;
+
+
+
+  insert into [dbo].[Role_Master_tbl] ([Role Name],[Role Description],CreatedBy,CreatedDate,UpdatedBy,UpdatedDate,IsActive) values (@name,@desc,@CreatedBy,@CreatedDate,@UpdatedBy,@UpdatedDate,@isActive)
+  END
+GO
+/****** Object:  StoredProcedure [dbo].[AdminDisplay]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[AdminDisplay]
+@Userid int
+as
+begin
+select 
+T2.[Userid]
+      ,T2.[Username]
+      ,T2.[Password]
+      ,T2.[Email]
+      ,T1.Username as Createdby
+      ,T2.[CreatedDate]
+      ,T1.Username as Updatedby
+      ,T2.[UpdatedDate]
+      ,T2.[IsActive] from Users_details as T1,
+Users_details as T2
+where T1.Userid=@Userid and T2.IsActive=1;
+end
+GO
+/****** Object:  StoredProcedure [dbo].[CertifiedBilled]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[CertifiedBilled]
+@year varchar(50)=null,
+    @table     NVARCHAR(128)
+
+
+
+AS
+BEGIN
+DECLARE @Sql NVARCHAR(MAX);
+
+
+
+    
+set @Sql ='with temp as (select DateName( month, DateAdd( month , tempMonth , -1 ) ) as month,sum(mt.temppeople) as [Certified and Billed] from(
+select  x.months as tempMonth,(CASE WHEN Month(t.DoJ) = x.months THEN count(*) ELSE 0 END) AS temppeople from '+ @table+' t
+cross join (
+select months from (values(1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12)) T(months)) x
+where t.Project is not null and t.Project_Start_Date is not null and t.KenMap_Level_3_Rating>=3 and year(DoJ)= '''+@year+''' group by DOJ,months) as mt group by mt.tempMonth) select month,[Certified and Billed] from temp
+union all select ''Total'',sum([Certified and Billed]) from temp'
+
+
+
+
+
+EXECUTE sp_executesql @Sql
+END
+GO
+/****** Object:  StoredProcedure [dbo].[CertifiedNotBilled]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[CertifiedNotBilled]
+@year varchar(50)=null,
+    @table     NVARCHAR(128)
+
+
+
+AS
+BEGIN
+DECLARE @Sql NVARCHAR(MAX);
+
+
+
+    
+set @Sql ='with temp as (select DateName( month, DateAdd( month , tempMonth , -1 ) ) as month,sum(mt.temppeople) as [Certified Not Billed] from(
+select  x.months as tempMonth,(CASE WHEN Month(t.DoJ) = x.months THEN count(*) ELSE 0 END) AS temppeople from '+ @table+' t
+cross join (
+select months from (values(1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12)) T(months)) x
+where (t.Project is not null and t.Project_Start_Date is  null and t.KenMap_Level_3_Rating>=3) or (t.Project is  null and t.Project_Start_Date is  null and t.KenMap_Level_3_Rating >=3) and year(DoJ)= '''+@year+''' group by DOJ,months) as mt group by mt.tempMonth) select month,[Not Certified and Billed] from temp
+union all select ''Total'',sum([Certified Not Billed]) from temp'
+
+
+
+
+
+EXECUTE sp_executesql @Sql
+
+
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[CreateUser]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+CREATE PROCEDURE [dbo].[CreateUser] 
+    -- Add the parameters for the stored procedure here
+    @Username nvarchar(50),
+    @Password nvarchar(50),
+    @Email nvarchar(50),
+    @Createdby int,
+    @CreatedDate Date,
+    @Updatedby int,
+    @UpdatedDate Date,
+    @IsActive bit
+As
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON;
+
+
+
+    -- Insert statements for procedure here
+    Insert into [dbo].[Users_details] (Username,Password,Email,Createdby,CreatedDate,Updatedby,UpdatedDate,IsActive) Values(@Username,@Password,@Email,@Createdby,@CreatedDate,@Updatedby,@UpdatedDate,@IsActive)
+END
+
+
+
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[DeleteEmp]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[DeleteEmp]
+@Tracker_Id int
+as 
+begin
+Update Tracker set IsActive='false' where Tracker_Id=@Tracker_Id
+end
+GO
+/****** Object:  StoredProcedure [dbo].[EmpList]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE proc [dbo].[EmpList]
+as
+begin
+Select Tracker_Id,IsActive,Emp_Id,Employee_Name,Batch,DOJ,Location,Status,Educational_Qualification,Branch,FCA_L_PL_Prog,FCA_L_PL_Score,FCA_L_PL_Date,TCB_Assigned,TCB_Specialization,Practice,FCA_SE_1,FCA_SE_2,FCA_SE_3,FCA_SE_Cleared_Date,SE_Attempts,TCB_Prog_Lang,FCA_PL1,FCA_PL2,FCA_PL3,FCA_PL_Cleared_Date,PL_Attempts,Hackathon_1_Feedback,Hackathon_2_Feedback,Prog_Lang_Training_Start,Prog_Lang_Trg_End,SCL_End,FCA_Due_Date,Training_Stage,TCB_Trg_Start,Stage_2_Start,Stage_3_Start,Stage_4_Start,KenMAP_Level_3_Date1,KenMAP_Level_3_Date2,Project,Project_Start_Date,KenMap_Level_3_Rating, Comments from Tracker where IsActive=1
+end
+GO
+/****** Object:  StoredProcedure [dbo].[Exited]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[Exited] 
+    @year varchar(50)=null,
+    @table     NVARCHAR(128)
+
+
+
+AS
+BEGIN
+DECLARE @Sql NVARCHAR(MAX);
+set @Sql ='WITH Temp AS(select DateName( month, DateAdd( month , tempMonth , -1 ) ) as month,sum(mt.temppeople) as Count from(
+select  x.months as tempMonth,(CASE WHEN Month(t.DoJ) = x.months THEN count(*) ELSE 0 END) AS temppeople from '+ @table+' t
+cross join (
+select months from (values(1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12)) T(months)) x
+where (t.Status=''Resign'' or t.Status=''Terminated'') and (year(DoJ)='''+@year+''') group by DOJ,months) as mt group by mt.tempMonth)
+SELECT month, Count  FROM Temp
+UNION ALL
+SELECT ''Total'', SUM(Count)  FROM Temp'
+
+
+
+
+
+EXECUTE sp_executesql @Sql
+END
+GO
+/****** Object:  StoredProcedure [dbo].[FileLog]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[FileLog]
+(
+@FileName varchar(50),
+@Success_Count int,
+@Failed_Count int,
+@Uploaded_By int,
+@Uploaded_Date date,
+@Userid int = null
+)
+AS
+BEGIN
+INSERT Into FileLogTable(FileName, Success_Count, Failed_Count, Uploaded_By, Uploaded_Date) 
+VALUES (@FileName, @Success_Count, @Failed_Count, @Uploaded_By, @Uploaded_Date) 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[GetAseDetail]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[GetAseDetail]
+as
+begin
+select  Emp_Id,Employee_Name,Batch,DOJ,Location,Status,Educational_Qualification,
+        Branch,FCA_L_PL_Prog,FCA_L_PL_Score,FCA_L_PL_Date,TCB_Assigned,TCB_Specialization,Practice,FCA_SE_1,FCA_SE_2,
+        FCA_SE_3,FCA_SE_Cleared_Date,SE_Attempts,TCB_Prog_Lang,FCA_PL1,FCA_PL2,FCA_PL3,
+        FCA_PL_Cleared_Date,PL_Attempts,Hackathon_1_Feedback,Hackathon_2_Feedback,Prog_Lang_training_Start,
+        Prog_Lang_Trg_End,SCL_End,FCA_Due_Date,Training_Stage,TCB_Trg_Start,Stage_2_Start,Stage_3_Start,Stage_4_Start,
+        KenMAP_Level_3_Date1,KenMAP_Level_3_Date2, KenMAP_Level_3_Rating, Project,Project_Start_Date from ASETable
+end
+GO
+/****** Object:  StoredProcedure [dbo].[GetEmployeeDetail1]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[GetEmployeeDetail1]
+@userid varchar(30)=null
+as
+begin
+
+
+
+Update  FileLogTable Set Uploaded_By=@userid  where Sr_No=(Select max(Sr_No) from FileLogTable)
+end
+GO
+/****** Object:  StoredProcedure [dbo].[GetEmployeeDetail2]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[GetEmployeeDetail2]
+
+
+
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON;
+    select  f.FileName,f.Failed_Count,f.Success_Count,u.Username As Uploaded_By,f.Uploaded_Date
+from Users_details as u,FileLogTable as f where u.Userid=f.Uploaded_By
+END
+GO
+/****** Object:  StoredProcedure [dbo].[GetEmployeeDetailsByLocation]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[GetEmployeeDetailsByLocation]  
+
+
+
+    @location varchar(50),
+    @year varchar(50)=null,
+    @table     NVARCHAR(128)
+
+
+
+AS
+BEGIN 
+  SET NOCOUNT ON;
+  DECLARE @Sql NVARCHAR(MAX);
+
+
+
+set @Sql = 'select m.TCB_Assigned,sum(m.Apr) Apr,sum(m.May) May,sum(m.Jun) Jun,sum(m.Jul) Jul,
+sum(m.Aug) Aug,sum(m.Sept)  Sept,sum(m.Oct)  Oct,sum(m.Nov)  Nov,sum(m.Dec)  Dec,sum(m.Jan) Jan,sum(m.Feb) Feb,sum(m.Mar) Mar,
+sum(m.Jan+m.Feb+m.Mar+m.Apr+m.May+m.Jun+m.Jul+m.Aug+m.Sept+m.Oct+m.Nov+m.Dec) as total from(
+SELECT TCB_Assigned,(case when month(DoJ) = 1 then count(*) else 0 end) Jan,
+(case when month(DoJ) = 2 then count(*) else 0 end)  Feb,
+(case when month(DoJ) = 3 then count(*) else 0 end)  Mar,
+(case when month(DoJ) = 4 then count(*) else 0 end)  Apr,
+(case when month(DoJ) = 5 then count(*) else 0 end)  May,
+(case when month(DoJ) = 6 then count(*) else 0 end)  Jun,
+(case when month(DoJ) = 7 then count(*) else 0 end)  Jul,
+(case when month(DoJ) = 8 then count(*) else 0 end)  Aug,
+(case when month(DoJ) = 9 then count(*) else 0 end)  Sept,
+(case when month(DoJ) = 10 then count(*) else 0 end)  Oct,
+(case when month(DoJ) = 11 then count(*) else 0 end)  Nov,
+(case when month(DoJ) = 12 then count(*) else 0 end)  Dec
+FROM ' +@table +
+' WHERE [Location] = '''+@location+''' and YEAR(DOJ) = '''+@year+''' and (Status = ''Under Training'' or Status = ''Transferred'') GROUP by TCB_Assigned,DoJ) as m group by  m.[TCB_Assigned]'
+EXECUTE sp_executesql @Sql
+END
+GO
+/****** Object:  StoredProcedure [dbo].[GetEmployeeDetailsByTCB]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[GetEmployeeDetailsByTCB]  
+
+
+
+    @tcb varchar(50),
+    @year varchar(50)=null,
+    @table     NVARCHAR(128)
+
+
+
+AS
+BEGIN 
+  SET NOCOUNT ON;
+  DECLARE @Sql NVARCHAR(MAX);
+
+
+
+set @Sql = 'select m.Location,sum(m.Jan) Jan,sum(m.Feb) Feb,sum(m.Mar) Mar,sum(m.Apr) Apr,sum(m.May) May,sum(m.Jun) Jun,sum(m.Jul) Jul,
+sum(m.Aug) Aug,sum(m.Sept)  Sept,sum(m.Oct)  Oct,sum(m.Nov)  Nov,sum(m.Dec)  Dec,
+sum(m.Jan+m.Feb+m.Mar+m.Apr+m.May+m.Jun+m.Jul+m.Aug+m.Sept+m.Oct+m.Nov+m.Dec) as total from(
+SELECT Location,(case when month(DoJ) = 1 then count(*) else 0 end) Jan,
+(case when month(DoJ) = 2 then count(*) else 0 end)  Feb,
+(case when month(DoJ) = 3 then count(*) else 0 end)  Mar,
+(case when month(DoJ) = 4 then count(*) else 0 end)  Apr,
+(case when month(DoJ) = 5 then count(*) else 0 end)  May,
+(case when month(DoJ) = 6 then count(*) else 0 end)  Jun,
+(case when month(DoJ) = 7 then count(*) else 0 end)  Jul,
+(case when month(DoJ) = 8 then count(*) else 0 end)  Aug,
+(case when month(DoJ) = 9 then count(*) else 0 end)  Sept,
+(case when month(DoJ) = 10 then count(*) else 0 end)  Oct,
+(case when month(DoJ) = 11 then count(*) else 0 end)  Nov,
+(case when month(DoJ) = 12 then count(*) else 0 end)  Dec
+FROM ' +@table +
+' WHERE YEAR(DoJ) = '''+@year+''' and [TCB_Assigned] = '''+@tcb+''' and (Status = ''Under Training'' or Status = ''Transferred'') GROUP by Location,DoJ) as m group by  m.[Location]'
+EXECUTE sp_executesql @Sql
+END
+GO
+/****** Object:  StoredProcedure [dbo].[GetLocation]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[GetLocation]
+as
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON;
+
+
+
+    -- Insert statements for procedure here
+    select distinct location from Tracker
+END
+GO
+/****** Object:  StoredProcedure [dbo].[GetRollID]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[GetRollID]
+
+
+
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON;
+
+
+
+    select distinct [Role Name], RoleId from Role_Master_tbl
+END
+GO
+/****** Object:  StoredProcedure [dbo].[GetRollMappingTable]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[GetRollMappingTable]
+    
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON;
+
+
+
+    -- Insert statements for procedure here
+    Select r.RoleMApId,t.[Role Name],u.Username,r.CreatedDate,r.UpdatedDate from Rolemap_tbl r,Users_details u,Role_Master_tbl t where r.user_id=u.Userid and r.RoleId=t.RoleId
+END
+GO
+/****** Object:  StoredProcedure [dbo].[GetRollMaster]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[GetRollMaster]
+    as
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON;
+
+
+
+    -- Insert statements for procedure here
+    SELECT t.RoleId,t.[Role Name],t.[Role Description],t.CreatedDate,t.UpdatedDate,u.Username from Role_Master_tbl t,Users_details u where t.IsActive=1 and t.CreatedBy=u.Userid
+END
+GO
+/****** Object:  StoredProcedure [dbo].[GetSearch]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[GetSearch]
+@search varchar(50)
+as
+
+
+
+
+select f.FileName,f.Failed_Count,f.Success_Count,u.Username As Uploaded_By,f.Uploaded_Date
+from Users_details as u,FileLogTable as f where u.Userid=f.Uploaded_By
+and f.FileName=@search
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetTableNames]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE     [dbo].[GetTableNames]
+
+
+
+    as
+BEGIN
+
+
+
+    SET NOCOUNT ON;
+
+
+
+    SELECT name
+FROM sys.tables
+END
+GO
+/****** Object:  StoredProcedure [dbo].[GetTCB]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[GetTCB]
+    
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON;
+
+
+
+    -- Insert statements for procedure here
+    select distinct [TCB_Assigned] from Tracker
+END
+GO
+/****** Object:  StoredProcedure [dbo].[GetUserID]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[GetUserID]
+    
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON;
+
+
+
+   select distinct Username, Userid from Users_details
+END
+GO
+/****** Object:  StoredProcedure [dbo].[GetYear]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[GetYear]
+    
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON;
+
+
+
+    -- Insert statements for procedure here
+    SELECT distinct year(DoJ) as year from Tracker
+END
+GO
+/****** Object:  StoredProcedure [dbo].[InsertEmp]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE proc [dbo].[InsertEmp]
+
+
+
+    @Emp_Id int,
+    @Employee_Name varchar(100),
+    @Batch int=NULL,
+    @DOJ date,
+    @Location varchar(50)=NULL,
+    @Status varchar(50)=NULL,
+    @Educational_Qualification varchar(50)=NULL,
+    @Branch varchar(100)=NULL,
+    @FCA_L_PL_Prog varchar(50)=NULL,
+    @FCA_L_PL_Score int=NULL,
+    @FCA_L_PL_Date date=NULL,
+    @TCB_Assigned varchar(50)=NULL,
+    @TCB_Specialization varchar(100)=NULL,
+    @Practice varchar(50)=NULL,
+    @FCA_SE_1 int=NULL,
+    @FCA_SE_2 int=NULL,
+    @FCA_SE_3 int=NULL,
+    @FCA_SE_Cleared_Date date=NULL,
+    @SE_Attempts int=NULL,
+    @TCB_Prog_Lang varchar(50)=NULL,
+    @FCA_PL1 int=NULL,
+    @FCA_PL2 int=NULL,
+    @FCA_PL3 int=NULL,
+    @FCA_PL_Cleared_Date date=NULL,
+    @PL_Attempts int=NULL,
+    @Hackathon_1_Feedback varchar(50)=NULL,
+    @Hackathon_2_Feedback varchar(50)=NULL,
+    @Prog_Lang_Training_Start date=NULL,
+    @Prog_Lang_Trg_End date=NULL,
+    @SCL_End date=NULL,
+    @FCA_Due_Date date=NULL,
+    @Training_Stage int=NULL,
+    @TCB_Trg_Start date=NULL,
+    @Stage_2_Start date=NULL,
+    @Stage_3_Start date=NULL,
+    @Stage_4_Start date=NULL,
+    @KenMAP_Level_3_Date1 date=NULL,
+    @KenMAP_Level_3_Date2 date=NULL,
+    @Project varchar(100)=NULL,
+    @Project_Start_Date date=NULL,
+    @KenMap_Level_3_Rating int=NULL,
+    @Comments varchar(max)=NULL
+as
+begin
+Insert into Tracker(Emp_Id,Employee_Name,Batch,DOJ,Location,Status,Educational_Qualification,Branch,FCA_L_PL_Prog,FCA_L_PL_Score,FCA_L_PL_Date,TCB_Assigned,TCB_Specialization,Practice,FCA_SE_1,FCA_SE_2,FCA_SE_3,FCA_SE_Cleared_Date,SE_Attempts,TCB_Prog_Lang,FCA_PL1,FCA_PL2,FCA_PL3,FCA_PL_Cleared_Date,PL_Attempts,Hackathon_1_Feedback,Hackathon_2_Feedback,Prog_Lang_Training_Start,Prog_Lang_Trg_End,SCL_End,FCA_Due_Date,Training_Stage,TCB_Trg_Start,Stage_2_Start,Stage_3_Start,Stage_4_Start,KenMAP_Level_3_Date1,KenMAP_Level_3_Date2,Project,Project_Start_Date,KenMap_Level_3_Rating,Comments)
+values (@Emp_Id,@Employee_Name,@Batch,@DOJ,@Location,@Status,@Educational_Qualification,@Branch,@FCA_L_PL_Prog,@FCA_L_PL_Score,@FCA_L_PL_Date,@TCB_Assigned,@TCB_Specialization,@Practice,@FCA_SE_1,@FCA_SE_2,@FCA_SE_3,@FCA_SE_Cleared_Date,@SE_Attempts,@TCB_Prog_Lang,@FCA_PL1,@FCA_PL2,@FCA_PL3,@FCA_PL_Cleared_Date,@PL_Attempts,@Hackathon_1_Feedback,@Hackathon_2_Feedback,@Prog_Lang_Training_Start,@Prog_Lang_Trg_End,@SCL_End,@FCA_Due_Date,@Training_Stage,@TCB_Trg_Start,@Stage_2_Start,@Stage_3_Start,@Stage_4_Start,@KenMAP_Level_3_Date1,@KenMAP_Level_3_Date2,@Project,@Project_Start_Date,@KenMap_Level_3_Rating,@Comments)
+end
+GO
+/****** Object:  StoredProcedure [dbo].[InsertTCR]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[InsertTCR]
+(
+@Emp_Id int, 
+@Employee_Name nvarchar(100), 
+@Manager_Emp_Id int, 
+@Manager_Name nvarchar(100), 
+@Band nvarchar(50), 
+@Org_Unit_ID int, 
+@Org_Unit nvarchar(50), 
+@Emp_Selected_Primary_TCB nvarchar(50), 
+@Date_Of_Hire date, 
+@Ongoing_TCB nvarchar(50), 
+@Hired_TCB nvarchar(50), 
+@Hired_TCB_Specialization nvarchar(50), 
+@Hired_Rating int, 
+@Date_Of_SME_Assessment date, 
+@SME_Emp_No int, 
+@SME_Name nvarchar(100), 
+@SME_Assessed_Primary_TCB nvarchar(50), 
+@SME_Assessed_KENMAP_Rating int,
+@Current_Status nvarchar(100),
+@Current_TCB_Requested_For nvarchar(100), 
+@Current_Date_Of_Request date, 
+@Current_Name_Of_SME nvarchar(100),
+@Current_Request_Id int, 
+@SME_Assessed_Specialization nvarchar(100), 
+@Employee_Specialization_Primary_TCB nvarchar(100)
+)
+AS
+BEGIN 
+INSERT INTO TCRTable (Emp_Id, Employee_Name, Manager_Emp_Id, Manager_Name, Band, Org_Unit_ID, Org_Unit, Emp_Selected_Primary_TCB, Date_Of_Hire, Ongoing_TCB, Hired_TCB, Hired_TCB_Specialization, Hired_Rating, Date_Of_SME_Assessment, SME_Emp_No, SME_Name, SME_Assessed_Primary_TCB, SME_Assessed_KENMAP_Rating, Current_Status, Current_TCB_Requested_For, Current_Date_Of_Request, Current_Name_Of_SME, Current_Request_Id, SME_Assessed_Specialization, Employee_Specialization_Primary_TCB) 
+VALUES(@Emp_Id, @Employee_Name, @Manager_Emp_Id, @Manager_Name, @Band, @Org_Unit_ID, @Org_Unit, @Emp_Selected_Primary_TCB, @Date_Of_Hire, @Ongoing_TCB, @Hired_TCB, @Hired_TCB_Specialization, @Hired_Rating, @Date_Of_SME_Assessment, @SME_Emp_No, @SME_Name, @SME_Assessed_Primary_TCB, @SME_Assessed_KENMAP_Rating, @Current_Status, @Current_TCB_Requested_For, @Current_Date_Of_Request, @Current_Name_Of_SME, @Current_Request_Id, @SME_Assessed_Specialization, @Employee_Specialization_Primary_TCB)
+END
+GO
+/****** Object:  StoredProcedure [dbo].[InsertTracker]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[InsertTracker]
+(
+@Emp_Id int,
+@Employee_Name nvarchar(100),
+@Batch int,
+@DOJ date,
+@Location varchar(50),
+@Status varchar(50),
+@Educational_Qualification varchar(50),
+@Branch varchar(100),
+@FCA_L_PL_Prog varchar(50),
+@FCA_L_PL_Score int,
+@FCA_L_PL_Date date, 
+@TCB_Assigned nvarchar(50), 
+@TCB_Specialization nvarchar(100), 
+@Practice nvarchar(50), 
+@FCA_SE_1 int,
+@FCA_SE_2 int, 
+@FCA_SE_3 int, 
+@FCA_SE_Cleared_Date date,
+@SE_Attempts int, 
+@TCB_Prog_Lang nvarchar(50), 
+@FCA_PL1 int, 
+@FCA_PL2 int,
+@FCA_PL3 int,
+@FCA_PL_Cleared_Date date,
+@PL_Attempts int, 
+@Hackathon_1_Feedback varchar(50),
+@Hackathon_2_Feedback varchar(50),
+@Prog_Lang_training_Start date, 
+@Prog_Lang_Trg_End date, 
+@SCL_End date, 
+@FCA_Due_Date date, 
+@Training_Stage int,
+@TCB_Trg_Start date, 
+@Stage_2_Start date, 
+@Stage_3_Start date, 
+@Stage_4_Start date, 
+@KenMAP_Level_3_Date1 date, 
+@KenMAP_Level_3_Date2 date, 
+@KenMAP_Level_3_Rating int, 
+@Project nvarchar(100), 
+@Project_Start_Date date)
+AS
+BEGIN 
+INSERT INTO ASETable (Emp_Id, 
+Employee_Name, 
+Batch, 
+DOJ, 
+Location, 
+Status, Educational_Qualification, Branch, FCA_L_PL_Prog, FCA_L_PL_Score, FCA_L_PL_Date, TCB_Assigned, TCB_Specialization, Practice, FCA_SE_1, FCA_SE_2, FCA_SE_3, FCA_SE_Cleared_Date, SE_Attempts, TCB_Prog_Lang, FCA_PL1, FCA_PL2, FCA_PL3, FCA_PL_Cleared_Date, PL_Attempts, Hackathon_1_Feedback, Hackathon_2_Feedback, Prog_Lang_training_Start, Prog_Lang_Trg_End, SCL_End, FCA_Due_Date, Training_Stage, TCB_Trg_Start, Stage_2_Start, Stage_3_Start, Stage_4_Start, KenMAP_Level_3_Date1, KenMAP_Level_3_Date2, KenMAP_Level_3_Rating, Project, Project_Start_Date) 
+VALUES(@Emp_Id, @Employee_Name, @Batch, @DOJ, @Location, @Status, @Educational_Qualification, @Branch, @FCA_L_PL_Prog, @FCA_L_PL_Score, @FCA_L_PL_Date, @TCB_Assigned, @TCB_Specialization, @Practice, @FCA_SE_1, @FCA_SE_2, @FCA_SE_3, @FCA_SE_Cleared_Date, @SE_Attempts, @TCB_Prog_Lang, @FCA_PL1, @FCA_PL2, @FCA_PL3, @FCA_PL_Cleared_Date, @PL_Attempts, @Hackathon_1_Feedback, @Hackathon_2_Feedback, @Prog_Lang_training_Start, @Prog_Lang_Trg_End, @SCL_End, @FCA_Due_Date, @Training_Stage, @TCB_Trg_Start, @Stage_2_Start, @Stage_3_Start, @Stage_4_Start, @KenMAP_Level_3_Date1, @KenMAP_Level_3_Date2, @KenMAP_Level_3_Rating, @Project, @Project_Start_Date)
+END
+GO
+/****** Object:  StoredProcedure [dbo].[NotCertifiedBilled]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[NotCertifiedBilled]
+@year varchar(50)=null,
+    @table     NVARCHAR(128)
+
+
+
+AS
+BEGIN
+DECLARE @Sql NVARCHAR(MAX);
+
+
+
+    
+set @Sql ='with temp as (select DateName( month, DateAdd( month , tempMonth , -1 ) ) as month,sum(mt.temppeople) as [Not Certified and Billed] from(
+select  x.months as tempMonth,(CASE WHEN Month(t.DoJ) = x.months THEN count(*) ELSE 0 END) AS temppeople from '+ @table+' t
+cross join (
+select months from (values(1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12)) T(months)) x
+where (t.Project is not null and t.Project_Start_Date is not null and t.KenMap_Level_3_Rating<3) or (t.Project is not null and t.Project_Start_Date is not null and t.KenMap_Level_3_Rating is null) and year(DoJ)= '''+@year+''' group by DOJ,months) as mt group by mt.tempMonth) select month,[Not Certified and Billed] from temp
+union all select ''Total'',sum([Not Certified and Billed]) from temp'
+
+
+
+
+
+
+EXECUTE sp_executesql @Sql
+
+
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[NotCertifiedNotBilled]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[NotCertifiedNotBilled]
+@year varchar(50)=null,
+    @table     NVARCHAR(128)
+
+
+
+AS
+BEGIN
+DECLARE @Sql NVARCHAR(MAX);
+
+
+
+    
+set @Sql ='with temp as (select DateName( month, DateAdd( month , tempMonth , -1 ) ) as month,sum(mt.temppeople) as [Not Certified Not Billed] from(
+select distinct x.months as tempMonth,(CASE WHEN Month(t.DoJ) = x.months THEN count(*) ELSE 0 END) AS temppeople from '+ @table+' t
+cross join (
+select months from (values(1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12)) T(months)) x
+where (t.Project is null and t.Project_Start_Date is null and t.KenMap_Level_3_Rating<3) or (t.Project is not null and t.Project_Start_Date is null and t.KenMap_Level_3_Rating<3) or (t.Project is null and t.Project_Start_Date is null and t.KenMap_Level_3_Rating is null) or (t.Project is not null and t.Project_Start_Date is null and t.KenMap_Level_3_Rating is null) and year(DoJ)= '''+@year+''' group by DOJ,months) as mt group by mt.tempMonth) select month,[Not Certified Not Billed] from temp
+union all select ''Total'',sum([Not Certified Not Billed]) from temp'
+
+
+
+
+
+EXECUTE sp_executesql @Sql
+
+
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[select_Edit_Tracker]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[select_Edit_Tracker]
+@Tracker_Id int
+as
+begin
+select * from Tracker where Tracker_Id=@Tracker_Id
+end
+GO
+/****** Object:  StoredProcedure [dbo].[Select_TCB_Assigned]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[Select_TCB_Assigned]
+As
+select Distinct TCB_Assigned from Tracker
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[sp_All_Batch_MultiLevel_PL]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[sp_All_Batch_MultiLevel_PL]
+as
+Begin
+select Batch,
+Count(Case 
+        when FCA_PL1 >= 50
+        then FCA_PL1
+        else NULL
+        end) as [1st Attempt],
+Count(Case 
+        when FCA_PL2 >= 50
+        then FCA_PL1
+        else null
+        end) as [2nd Attempt],
+Count(Case 
+        when FCA_PL3 >= 50
+        then FCA_PL1
+        else null
+        end) as [3rd Attempt]
+from Tracker
+Group by Batch
+end
+GO
+/****** Object:  StoredProcedure [dbo].[sp_All_Batch_MultiLevel_SE]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[sp_All_Batch_MultiLevel_SE]
+As
+begin
+select Batch,
+Count(Case 
+        when FCA_SE_1 >= 50
+        then FCA_SE_1
+        else NULL
+        end) as [1st Attempt],
+Count(Case 
+        when FCA_SE_2 >= 50
+        then FCA_SE_2
+        else null
+        end) as [2nd Attempt],
+Count(Case 
+        when FCA_SE_3 >= 50
+        then FCA_SE_3
+        else null
+        end) as [3rd Attempt]
+from Tracker
+Group by Batch
+end
+GO
+/****** Object:  StoredProcedure [dbo].[sp_All_Batch_MultiLevel_SME]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[sp_All_Batch_MultiLevel_SME]
+as
+begin
+SELECT
+Batch,
+COUNT(CASE 
+        WHEN [KenMAP_Level_3_Date1] IS NOT NULL 
+        AND    [KenMAP_Level_3_Date2] IS NULL
+        AND [KenMap_Level_3_Rating] >= 3 THEN KenMAP_Level_3_Date1
+        ELSE NULL
+END) as [1st Attempt],
+COUNT(CASE 
+        WHEN [KenMAP_Level_3_Date1] IS NOT NULL 
+        AND    [KenMAP_Level_3_Date2] IS NOT NULL
+        AND [KenMap_Level_3_Rating] >= 3 THEN KenMAP_Level_3_Date2
+        ELSE NULL
+END) as [2nd Attempt]
+FROM Tracker
+Group by Batch
+end
+GO
+/****** Object:  StoredProcedure [dbo].[sp_Detail]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[sp_Detail] (@column_name VARCHAR(50), @batch INT)
+AS
+BEGIN
+    DECLARE @query NVARCHAR(MAX) = 'SELECT Count(Emp_Id) as Number_Of_Employees, TCB_Assigned FROM Tracker WHERE ' + @column_name + ' >= 50 AND Batch = @batch GROUP BY TCB_Assigned';
+
+
+
+    EXEC sp_executesql @query, N'@batch INT', @batch;
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_EngClearedFCAPL]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Proc [dbo].[sp_EngClearedFCAPL]
+@Test varchar(20)
+As
+Begin
+Declare @query nvarchar(max) = 'SELECT TCB_Assigned, COUNT(*) as ''Number of Engineers Cleared''
+FROM Tracker WHERE ' + @Test +  '>= 50 
+GROUP BY TCB_Assigned 
+UNION 
+SELECT ''Total'', COUNT(*) FROM Tracker WHERE ' + @Test + '>= 50'
+Exec sp_executesql @query
+End
+GO
+/****** Object:  StoredProcedure [dbo].[sp_EngClearedFCASE]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Proc [dbo].[sp_EngClearedFCASE]
+@Test varchar(20)
+As
+Begin
+Declare @query nvarchar(max) = 'SELECT TCB_Assigned, COUNT(*) as ''Number of Engineers Cleared''
+FROM Tracker WHERE ' + @Test +  '>= 50 
+GROUP BY TCB_Assigned 
+UNION 
+SELECT ''Total'', COUNT(*) FROM Tracker WHERE ' + @Test + '>= 50'
+Exec sp_executesql @query
+End
+GO
+/****** Object:  StoredProcedure [dbo].[sp_FCA_PL]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[sp_FCA_PL] 
+@Batch varchar(max)
+as
+begin
+DECLARE @result1 INT, @result2 INT, @result3 INT;
+
+
+
+SET @result1 = (SELECT COUNT(*) FROM Tracker WHERE FCA_PL1 >= 50 AND Batch = @Batch);
+SET @result2 = (SELECT count(*) FROM Tracker WHERE FCA_PL2 >= 50 AND Batch = @Batch);
+SET @result3 = (SELECT count(*) FROM Tracker WHERE FCA_PL3 >= 50 AND Batch = @Batch);
+
+
+
+SELECT @result1, @result2, @result3;
+end
+GO
+/****** Object:  StoredProcedure [dbo].[sp_FCA_SE]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[sp_FCA_SE] 
+@Batch varchar(max)
+as
+begin
+DECLARE @result1 INT, @result2 INT, @result3 INT;
+
+
+
+SET @result1 = (SELECT COUNT(*) FROM Tracker WHERE FCA_SE_1 >= 50 AND Batch = @Batch);
+SET @result2 = (SELECT count(*) FROM Tracker WHERE FCA_SE_2 >= 50 AND Batch = @Batch);
+SET @result3 = (SELECT count(*) FROM Tracker WHERE FCA_SE_3 >= 50 AND Batch = @Batch);
+
+
+
+SELECT @result1, @result2, @result3;
+end
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SME]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE proc [dbo].[sp_SME] 
+@Batch int
+as 
+Begin
+SELECT
+COUNT(CASE 
+        WHEN [KenMAP_Level_3_Date1] IS NOT NULL 
+        AND    [KenMAP_Level_3_Date2] IS NULL
+        AND [KenMap_Level_3_Rating] >= 3 THEN KenMAP_Level_3_Date1
+        ELSE NULL
+END) as [1st Attempt],
+COUNT(CASE 
+        WHEN [KenMAP_Level_3_Date1] IS NOT NULL 
+        AND    [KenMAP_Level_3_Date2] IS NOT NULL
+        AND [KenMap_Level_3_Rating] >= 3 THEN KenMAP_Level_3_Date2
+        ELSE NULL
+END) as [2nd Attempt]
+FROM Tracker
+where Batch = @Batch
+Group by Batch
+end
+
+
+
+exec sp_SME 3
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SME_Details]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+--Select TCB_Assigned, COUNT(Emp_Id) as Number_Of_Employees,
+
+
+
+--SUM(CASE When KenMAP_Level_3_Date1 IS NOT NULL 
+--    AND 
+--    KenMap_Level_3_Rating >= 3
+--    Then 1
+--    Else 0
+--END) as KenMAP_Level_3_Date1_Count,
+--SUM(CASE When KenMAP_Level_3_Date2 IS NOT NULL 
+--    AND 
+--    KenMap_Level_3_Rating >= 3
+--    Then 1
+--    Else 0
+--END) as KenMAP_Level_3_Date2_Count
+
+
+
+--From Tracker
+--Group by TCB_Assigned
+--Having Count(Emp_Id) > 0
+
+
+
+--SELECT Count(Emp_Id) as Number_Of_Employees, TCB_Assigned 
+--FROM Tracker 
+--WHERE 
+--(COUNT(CASE 
+--        WHEN [KenMAP_Level_3_Date1] IS NOT NULL 
+--        AND    [KenMAP_Level_3_Date2] IS NULL
+--        AND [KenMap_Level_3_Rating] >= 3 THEN KenMAP_Level_3_Date1
+--        ELSE NULL
+--END),
+--COUNT(CASE 
+--        WHEN [KenMAP_Level_3_Date1] IS NOT NULL 
+--        AND    [KenMAP_Level_3_Date2] IS NOT NULL
+--        AND [KenMap_Level_3_Rating] >= 3 THEN KenMAP_Level_3_Date2
+--        ELSE NULL
+--END) 
+--)
+--GROUP BY TCB_Assigned
+
+
+
+--Declare @Attempt int, @Batch int
+--SELECT Count(Emp_Id) as Number_Of_Employees, TCB_Assigned FROM Tracker 
+--WHERE
+--    IF @Attempt = 1
+--    Begin
+--        Where KenMAP_Level_3_Date1 is not null and KenMAP_Level_3_Date2 is null and KenMap_Level_3_Rating >= 3 and Batch = @Batch
+--    END
+--    ELSE
+--    BEGIN
+--        Where KenMAP_Level_3_Date1 is not null and KenMAP_Level_3_Date2 is not null and KenMap_Level_3_Rating >= 3 and Batch = @Batch
+--    END
+--Group by TCB_Assigned
+
+
+
+
+
+
+
+
+
+
+create proc [dbo].[sp_SME_Details] @Attempt INT, @Batch INT
+as
+Declare @Cond int
+begin
+IF @Attempt = 1
+    SET @Cond = 1
+ELSE 
+    SET @Cond = 2
+
+
+
+SELECT Count(Emp_Id) as Number_Of_Employees, TCB_Assigned FROM Tracker
+WHERE
+     (@Cond = 1 and KenMAP_Level_3_Date1 is not null AND KenMAP_Level_3_Date2 is null AND KenMap_Level_3_Rating >= 3 AND Batch = @Batch)
+     OR
+     (@Cond = 2 and KenMAP_Level_3_Date1 is not null AND KenMAP_Level_3_Date2 is not null AND KenMap_Level_3_Rating >= 3 AND Batch = @Batch)
+GROUP BY TCB_Assigned
+end
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_Tracker_Summary]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[Sp_Tracker_Summary]
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+   SET NOCOUNT ON;
+   declare @Tracker Table
+   (
+   FCA_PL Varchar(50),
+   Num_Emp_Cleared_FCA_PL int,
+   FCA_SE varchar(50),
+   Num_Emp_Cleared_FCA_SE int,
+   SME varchar(50),
+   Num_Emp_Cleared_FCA_SME int);
+
+
+
+   insert into @Tracker values ('1st Attempt', (Select Count(*) FROM Tracker WHERE FCA_PL1 >= 50 and Batch = 1),'1st Attempt',(Select Count(*) FROM Tracker WHERE FCA_PL2 >= 50 and Batch = 1),'1st Attempt', (Select Count(*) FROM Tracker WHERE FCA_PL3 >= 50 and Batch = 1));
+   insert into @Tracker values ('2nd Attempt',(Select Count(*) FROM Tracker WHERE FCA_SE_1 >= 50 and Batch = 1),'2nd Attempt',(Select Count(*) FROM Tracker WHERE FCA_SE_2 >= 50 and Batch = 1),'1st Attempt', (Select Count(*) FROM Tracker WHERE FCA_SE_3 >= 50 and Batch = 1));
+   insert into @Tracker values ('3rd Attempt',(Select Count(*) FROM Tracker WHERE FCA_SE_1 >= 50 and Batch = 1),'3rd Attempt',(Select Count(*) FROM Tracker WHERE FCA_SE_1 >= 50 and Batch = 1),'1st Attempt', (Select Count(*) FROM Tracker WHERE FCA_SE_1 >= 50 and Batch = 1));
+
+
+
+   --Testing purpose and should be removed   
+   select * from @Tracker
+
+
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spInsertBatch1]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[spInsertBatch1]
+as
+INSERT INTO [dbo].[Batch 1]
+Values ('1st Attempt', (Select Count(*) FROM Tracker WHERE FCA_PL1 >= 50 and Batch = 1), '1st Attempt', (Select Count(*) FROM Tracker WHERE FCA_SE_1 >= 50 and Batch = 1))
+
+
+
+INSERT INTO [dbo].[Batch 1]
+Values ('2nd Attempt', (Select Count(*) FROM Tracker WHERE FCA_PL2 >= 50 and Batch = 1), '2nd Attempt', (Select Count(*) FROM Tracker WHERE FCA_SE_2 >= 50 and Batch = 1))
+
+
+
+INSERT INTO [dbo].[Batch 1]
+Values ('3rd Attempt', (Select Count(*) FROM Tracker WHERE FCA_PL3 >= 50 and Batch = 1), '3rd Attempt', (Select Count(*) FROM Tracker WHERE FCA_SE_3 >= 50 and Batch = 1))
+GO
+/****** Object:  StoredProcedure [dbo].[spInsertBatch2]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[spInsertBatch2]
+as
+INSERT INTO [dbo].[Batch 2]
+Values ('1st Attempt', (Select Count(*) FROM Tracker WHERE FCA_PL1 >= 50 and Batch = 2), '1st Attempt', (Select Count(*) FROM Tracker WHERE FCA_SE_1 >= 50 and Batch = 2))
+
+
+
+INSERT INTO [dbo].[Batch 2]
+Values ('2nd Attempt', (Select Count(*) FROM Tracker WHERE FCA_PL2 >= 50 and Batch = 2), '2nd Attempt', (Select Count(*) FROM Tracker WHERE FCA_SE_2 >= 50 and Batch = 2))
+
+
+
+INSERT INTO [dbo].[Batch 2]
+Values ('3rd Attempt', (Select Count(*) FROM Tracker WHERE FCA_PL3 >= 50 and Batch = 2), '3rd Attempt', (Select Count(*) FROM Tracker WHERE FCA_SE_3 >= 50 and Batch = 2))
+GO
+/****** Object:  StoredProcedure [dbo].[spInsertBatch3]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[spInsertBatch3]
+as
+INSERT INTO [dbo].[Batch 3]
+Values ('1st Attempt', (Select Count(*) FROM Tracker WHERE FCA_PL1 >= 50 and Batch = 3), '1st Attempt', (Select Count(*) FROM Tracker WHERE FCA_SE_1 >= 50 and Batch = 3))
+
+
+
+INSERT INTO [dbo].[Batch 3]
+Values ('2nd Attempt', (Select Count(*) FROM Tracker WHERE FCA_PL2 >= 50 and Batch = 3), '2nd Attempt', (Select Count(*) FROM Tracker WHERE FCA_SE_2 >= 50 and Batch = 3))
+
+
+
+INSERT INTO [dbo].[Batch 3]
+Values ('3rd Attempt', (Select Count(*) FROM Tracker WHERE FCA_PL3 >= 50 and Batch = 3), '3rd Attempt', (Select Count(*) FROM Tracker WHERE FCA_SE_3 >= 50 and Batch = 3))
+GO
+/****** Object:  StoredProcedure [dbo].[spInsertBatch4]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[spInsertBatch4]
+as
+INSERT INTO [dbo].[Batch 4]
+Values ('1st Attempt', (Select Count(*) FROM Tracker WHERE FCA_PL1 >= 50 and Batch = 4), '1st Attempt', (Select Count(*) FROM Tracker WHERE FCA_SE_1 >= 50 and Batch = 4))
+
+
+
+INSERT INTO [dbo].[Batch 4]
+Values ('2nd Attempt', (Select Count(*) FROM Tracker WHERE FCA_PL2 >= 50 and Batch = 4), '2nd Attempt', (Select Count(*) FROM Tracker WHERE FCA_SE_2 >= 50 and Batch = 4))
+
+
+
+INSERT INTO [dbo].[Batch 4]
+Values ('3rd Attempt', (Select Count(*) FROM Tracker WHERE FCA_PL3 >= 50 and Batch = 4), '3rd Attempt', (Select Count(*) FROM Tracker WHERE FCA_SE_3 >= 50 and Batch = 4))
+GO
+/****** Object:  StoredProcedure [dbo].[synctables]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[synctables]
+as
+begin
+Insert into Tracker(Emp_Id, Employee_Name, Batch, DOJ, [Location],[Status], Educational_Qualification, Branch, 
+FCA_L_PL_Prog, FCA_L_PL_Score, FCA_L_PL_Date, TCB_Assigned, TCB_Specialization, Practice, FCA_SE_1, FCA_SE_2, FCA_SE_3,
+FCA_SE_Cleared_Date, SE_Attempts,TCB_Prog_Lang, FCA_PL1, FCA_PL2, FCA_PL3, FCA_PL_Cleared_Date, PL_Attempts, 
+Hackathon_1_Feedback,Hackathon_2_Feedback, Prog_Lang_training_Start, Prog_Lang_Trg_End, SCL_End, FCA_Due_Date, 
+Training_Stage,TCB_Trg_Start, Stage_2_Start, Stage_3_Start, Stage_4_Start, KenMAP_Level_3_Date1, KenMAP_Level_3_Date2, 
+Project, Project_Start_Date,KenMap_Level_3_Rating,Comments,IsActive) (select Emp_Id, Employee_Name, Batch, DOJ, [Location], [Status], Educational_Qualification, Branch,
+FCA_L_PL_Prog, FCA_L_PL_Score, FCA_L_PL_Date, TCB_Assigned, TCB_Specialization,Practice, FCA_SE_1, FCA_SE_2, FCA_SE_3,
+FCA_SE_Cleared_Date, SE_Attempts, TCB_Prog_Lang,FCA_PL1, FCA_PL2, FCA_PL3, FCA_PL_Cleared_Date, PL_Attempts, 
+Hackathon_1_Feedback,Hackathon_2_Feedback, Prog_Lang_training_Start, Prog_Lang_Trg_End, SCL_End, FCA_Due_Date, 
+Training_Stage, TCB_Trg_Start, Stage_2_Start, Stage_3_Start, Stage_4_Start, KenMAP_Level_3_Date1,
+KenMAP_Level_3_Date2,  Project, Project_Start_Date,null,null,1 from ASETable)
+end
+GO
+/****** Object:  StoredProcedure [dbo].[UpdateEmp]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE proc [dbo].[UpdateEmp]
+    @Tracker_Id int,
+    @Emp_Id int,
+    @Employee_Name varchar(100),
+    @Batch int=NULL,
+    @DOJ date,
+    @Location varchar(50)=NULL,
+    @Status varchar(50)=NULL,
+    @Educational_Qualification varchar(50)=NULL,
+    @Branch varchar(100)=NULL,
+    @FCA_L_PL_Prog varchar(50)=NULL,
+    @FCA_L_PL_Score int=NULL,
+    @FCA_L_PL_Date date=NULL,
+    @TCB_Assigned varchar(50)=NULL,
+    @TCB_Specialization varchar(100)=NULL,
+    @Practice nvarchar(50)=NULL,
+    @FCA_SE_1 int=NULL,
+    @FCA_SE_2 int=NULL,
+    @FCA_SE_3 int=NULL,
+    @FCA_SE_Cleared_Date date=NULL,
+    @SE_Attempts int=NULL,
+    @TCB_Prog_Lang varchar(50)=NULL,
+    @FCA_PL1 int=NULL,
+    @FCA_PL2 int=NULL,
+    @FCA_PL3 int=NULL,
+    @FCA_PL_Cleared_Date date=NULL,
+    @PL_Attempts int=NULL,
+    @Hackathon_1_Feedback varchar(50)=NULL,
+    @Hackathon_2_Feedback varchar(50)=NULL,
+    @Prog_Lang_Training_Start date=NULL,
+    @Prog_Lang_Trg_End date=NULL,
+    @SCL_End date=NULL,
+    @FCA_Due_Date date=NULL,
+    @Training_Stage int=NULL,
+    @TCB_Trg_Start date=NULL,
+    @Stage_2_Start date=NULL,
+    @Stage_3_Start date=NULL,
+    @Stage_4_Start date=NULL,
+    @KenMAP_Level_3_Date1 date=NULL,
+    @KenMAP_Level_3_Date2 date=NULL,
+    @Project varchar(100)=NULL,
+    @Project_Start_Date date=NULL,
+    @KenMap_Level_3_Rating int=NULL,
+    @Comments varchar(max)=NULL
+as
+begin
+update Tracker set Emp_Id=@Emp_Id,Employee_Name=@Employee_Name,Batch=@Batch,DOJ=@DOJ,Location=@Location,Status=@Status,Educational_Qualification=@Educational_Qualification,Branch=@Branch,FCA_L_PL_Prog=@FCA_L_PL_Prog,FCA_L_PL_Score=@FCA_L_PL_Score,FCA_L_PL_Date=@FCA_L_PL_Date,TCB_Assigned=@TCB_Assigned,TCB_Specialization=@TCB_Specialization,Practice=@Practice,FCA_SE_1=@FCA_SE_1,FCA_SE_2=@FCA_SE_2,FCA_SE_3=@FCA_SE_3,FCA_SE_Cleared_Date=@FCA_SE_Cleared_Date,SE_Attempts=@SE_Attempts,TCB_Prog_Lang=@TCB_Prog_Lang,FCA_PL1=@FCA_PL1,FCA_PL2=@FCA_PL2,FCA_PL3=@FCA_PL3,FCA_PL_Cleared_Date=@FCA_PL_Cleared_Date,PL_Attempts=@PL_Attempts,Hackathon_1_Feedback=@Hackathon_1_Feedback,Hackathon_2_Feedback=@Hackathon_2_Feedback,Prog_Lang_Training_Start=@Prog_Lang_Training_Start,Prog_Lang_Trg_End=@Prog_Lang_Trg_End,SCL_End=@SCL_End,FCA_Due_Date=@FCA_Due_Date,Training_Stage=@Training_Stage,TCB_Trg_Start=@TCB_Trg_Start,Stage_2_Start=@Stage_2_Start,Stage_3_Start=@Stage_3_Start,Stage_4_Start=@Stage_4_Start,KenMAP_Level_3_Date1=@KenMAP_Level_3_Date1,KenMAP_Level_3_Date2=@KenMAP_Level_3_Date2,Project=@Project,Project_Start_Date=@Project_Start_Date,KenMap_Level_3_Rating=@KenMap_Level_3_Rating,Comments=@Comments where Tracker_Id=@Tracker_Id
+end
+GO
+/****** Object:  StoredProcedure [dbo].[User_Login]    Script Date: 1/27/2023 5:03:05 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[User_Login]
+    @Username nvarchar(50),
+    @Password nvarchar(max)
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON;
+
+
+
+   select Username,Password from [dbo].[Users_details] where Username=@Username and Password=@Password
+END
+GO
+USE [master]
+GO
+ALTER DATABASE [ESL] SET  READ_WRITE 
+GO
